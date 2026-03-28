@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Diamond AI — Интеллектуальный помощник</title>
+    <!-- Google Fonts + Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0a0a0f;
+            font-family: 'Inter', sans-serif;
+            color: #e5e7eb;
+            line-height: 1.5;
+            scroll-behavior: smooth;
+        }
+
+        /* Тёмная тема с серебристыми акцентами */
+        :root {
+            --bg-dark: #0a0a0f;
+            --bg-card: #111116;
+            --border-dim: #1f1f2a;
+            --text-light: #e5e7eb;
+            --text-muted: #9ca3af;
+            --accent-silver: #b0b3b8;
+            --btn-bg: #1a1a22;
+            --btn-hover: #2a2a33;
+            --grad-silver: linear-gradient(135deg, #2a2a33, #1a1a22);
+        }
+
+        /* Анимации */
+        @keyframes fadeUp {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Шапка */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--text-light);
+        }
+        .logo-img {
+            height: 42px;
+            width: auto;
+            object-fit: contain;
+            filter: brightness(0.9);
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.2s;
+        }
+        .nav-links a:hover {
+            color: var(--text-light);
+        }
+        .install-btn-header {
+            background: var(--btn-bg);
+            border: 1px solid var(--border-dim);
+            padding: 10px 24px;
+            border-radius: 40px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: var(--text-light);
+        }
+        .install-btn-header:hover {
+            background: var(--btn-hover);
+            transform: translateY(-2px);
+            border-color: #6b6e7a;
+        }
+
+        /* Hero секция */
+        .hero {
+            padding: 80px 0 100px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 800;
+            background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 24px;
+            letter-spacing: -1px;
+        }
+        .hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .btn-primary {
+            background: var(--grad-silver);
+            padding: 14px 36px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 1px solid var(--border-dim);
+            cursor: pointer;
+            transition: 0.3s;
+            color: var(--text-light);
+        }
+        .btn-primary:hover {
+            transform: scale(1.02);
+            background: #2a2a33;
+            border-color: #6b6e7a;
+        }
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-dim);
+            padding: 14px 36px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--text-light);
+        }
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.03);
+            border-color: #9ca3af;
+        }
+
+        /* Секции */
+        .section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border-dim);
+        }
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 56px;
+            letter-spacing: -0.5px;
+            color: var(--text-light);
+        }
+        .section-title span {
+            background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+        .card {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 32px 24px;
+            border: 1px solid var(--border-dim);
+            transition: all 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #3a3a44;
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.5);
+        }
+        .card-icon {
+            font-size: 40px;
+            background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        .card p {
+            color: var(--text-muted);
+        }
+
+        /* О создателе */
+        .creator {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 48px;
+            text-align: center;
+        }
+        .creator-avatar {
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            overflow: hidden;
+            background: #1a1a22;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #3a3a44;
+        }
+        .creator-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .creator-info {
+            max-width: 500px;
+        }
+        .creator-info h3 {
+            font-size: 28px;
+            margin-bottom: 16px;
+        }
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .social-links a {
+            color: var(--text-muted);
+            font-size: 24px;
+            transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: var(--text-light);
+            transform: scale(1.1);
+        }
+
+        /* FAQ */
+        .faq-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-dim);
+            border-radius: 20px;
+            margin-bottom: 20px;
+            padding: 20px 28px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: var(--text-muted);
+            padding-top: 0;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 200px;
+            padding-top: 16px;
+        }
+        .faq-icon {
+            transition: transform 0.2s;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+
+        /* Футер */
+        .footer {
+            padding: 48px 0 32px;
+            text-align: center;
+            border-top: 1px solid var(--border-dim);
+            margin-top: 40px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
+        }
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+        .footer-links a:hover {
+            color: var(--text-light);
+        }
+        .copyright {
+            font-size: 0.85rem;
+            color: #6b7280;
+        }
+
+        /* Модалка */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(4px);
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: fadeIn 0.2s;
+        }
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 32px;
+            padding: 32px;
+            max-width: 440px;
+            text-align: center;
+            border: 1px solid var(--border-dim);
+        }
+        .modal-content i {
+            font-size: 48px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+        }
+        .modal-content h3 {
+            font-size: 28px;
+            margin-bottom: 12px;
+        }
+        .modal-content p {
+            margin-bottom: 24px;
+            color: var(--text-muted);
+        }
+        .modal-close {
+            background: var(--btn-bg);
+            border: 1px solid var(--border-dim);
+            padding: 10px 20px;
+            border-radius: 40px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: 0.2s;
+            color: var(--text-light);
+        }
+        .modal-close:hover {
+            background: var(--btn-hover);
+            border-color: #6b6e7a;
+        }
+
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+            .hero {
+                padding: 50px 0 60px;
+            }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .btn-primary, .btn-secondary {
+                padding: 10px 24px;
+                font-size: 0.9rem;
+            }
+            .section {
+                padding: 50px 0;
+            }
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 40px;
+            }
+            .grid-3 {
+                gap: 24px;
+            }
+            .card {
+                padding: 24px 20px;
+            }
+            .creator {
+                flex-direction: column;
+                gap: 24px;
+            }
+            .creator-avatar {
+                width: 120px;
+                height: 120px;
+            }
+            .creator-info h3 {
+                font-size: 24px;
+            }
+            .footer-links {
+                gap: 20px;
+            }
+            .modal-content {
+                margin: 20px;
+                padding: 24px;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .nav-links {
+                gap: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Навигация -->
+        <div class="navbar">
+            <div class="logo">
+                <img src="https://cdn.discordapp.com/attachments/1223595469746475049/1487296322389413968/photo_2026-03-10_13-52-33-Photoroom.png?ex=69c8a023&is=69c74ea3&hm=c7063b3f55f22a0dd1a121bdd2832023330fb4f0456429f35d1bbc0324aad5fe&" alt="Diamond AI" class="logo-img" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23e5e7eb%22%3E%3Cpath d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/%3E%3C/svg%3E';">
+                <span>DIAMOND AI</span>
+            </div>
+            <div class="nav-links">
+                <a href="#features">Возможности</a>
+                <a href="#creator">О создателе</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contacts">Контакты</a>
+            </div>
+            <button class="install-btn-header" id="headerInstallBtn">Установить</button>
+        </div>
+
+        <!-- Главный экран -->
+        <div class="hero">
+            <h1>Интеллект,<br>отточенный как алмаз</h1>
+            <p>DIAMOND AI — нейросетевой помощник на собственной модели diamond-techo.vshpps. Работает локально, защищает приватность и понимает вас с полуслова.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" id="installHeroBtn">Скачать приложение</button>
+                <a href="#features" class="btn-secondary">Узнать больше →</a>
+            </div>
+        </div>
+
+        <!-- Возможности -->
+        <div class="section" id="features">
+            <div class="section-title">Почему <span>DIAMOND AI</span>?</div>
+            <div class="grid-3">
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-brain"></i></div>
+                    <h3>Собственная модель</h3>
+                    <p>Работает на уникальной архитектуре diamond-techo.vshpps — быстрая, лёгкая, без утечек данных.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-folder-tree"></i></div>
+                    <h3>Папки и сортировка</h3>
+                    <p>Группируйте чаты в папки с иконками и цветами. Не теряйте важные диалоги.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-image"></i></div>
+                    <h3>Генерация изображений</h3>
+                    <p>Встроенный ГенХаб — создавайте картинки через Diamond Photo API. Скоро в обновлении.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h3>Приватность</h3>
+                    <p>Все данные хранятся локально. API-ключи шифруются. Никто не увидит ваши чаты.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-chalkboard-user"></i></div>
+                    <h3>Интеллектуальный диалог</h3>
+                    <p>Поддержка научных формул (LaTeX), кода, химических уравнений. Идеально для учёбы и работы.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                    <h3>Автообновления</h3>
+                    <p>Новые функции и исправления приходят автоматически через GitHub Releases.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- О создателе -->
+        <div class="section" id="creator">
+            <div class="section-title"><span>Создатель</span> проекта</div>
+            <div class="creator">
+                <div class="creator-avatar">
+                    <img src="https://media.discordapp.net/attachments/1223595469746475049/1487296322758508544/photo_2026-03-09_21-18-16.jpg?ex=69c8a023&is=69c74ea3&hm=66a499966a075a9d37d431f6671bf54bccd746a822678d7794ab793e89e981e2&=&format=webp&width=800&height=800" alt="viktorshopa" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%239ca3af%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E';">
+                </div>
+                <div class="creator-info">
+                    <h3>viktorshopa</h3>
+                    <p>Основатель сети Diamond, инженер AI-систем. Создал DIAMOND AI, чтобы сделать мощный ИИ доступным каждому. Студент, разработчик, энтузиаст open-source.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/diamondshop" target="_blank"><i class="fab fa-discord"></i></a>
+                        <a href="https://t.me/vshpps" target="_blank"><i class="fab fa-telegram"></i></a>
+                        <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section" id="faq">
+            <div class="section-title">Часто задаваемые <span>вопросы</span></div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Как установить DIAMOND AI?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Скоро будет доступен установщик для Windows, macOS и Linux. Следите за новостями!
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Нужен ли API-ключ?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Для чата требуется API-ключ OpenRouter. Вы можете использовать свой или встроенный (с ограничениями). Для генерации изображений используется собственный Diamond Photo API.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Можно ли использовать без интернета?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Для работы AI необходим интернет (вызов API). Однако все ваши чаты и настройки сохраняются локально.
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Планируется ли мобильная версия?</span>
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Да, в планах — адаптивное веб-приложение и нативные мобильные клиенты. Следите за анонсами.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <div class="footer" id="contacts">
+            <div class="footer-links">
+                <a href="https://discord.gg/diamondshop" target="_blank">Discord-сервер</a>
+                <a href="https://t.me/vshpps" target="_blank">Telegram</a>
+                <a href="#">GitHub</a>
+                <a href="#">Terms of Use</a>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="copyright">
+                © 2026 Diamond AI. Все права защищены. Сделано с ❤️ для сообщества.
+            </div>
+        </div>
+    </div>
+
+    <!-- Модалка установки -->
+    <div class="modal" id="installModal">
+        <div class="modal-content">
+            <i class="fas fa-gem"></i>
+            <h3>Скоро!</h3>
+            <p>Установочный файл будет доступен в ближайшее время. Подпишитесь на обновления в Discord, чтобы не пропустить релиз.</p>
+            <button class="modal-close" id="closeModalBtn">Закрыть</button>
+        </div>
+    </div>
+
+    <script>
+        // FAQ аккордеон
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const header = item.querySelector('.faq-question');
+            header.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Модалка установки
+        const modal = document.getElementById('installModal');
+        const openModalBtns = [document.getElementById('installHeroBtn'), document.getElementById('headerInstallBtn')];
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        function openModal() {
+            modal.style.display = 'flex';
+        }
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        openModalBtns.forEach(btn => {
+            if (btn) btn.addEventListener('click', openModal);
+        });
+        closeModalBtn.addEventListener('click', closeModal);
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+        });
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
