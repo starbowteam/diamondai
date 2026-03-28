@@ -1,0 +1,16 @@
+{
+  "name": "Diamond AI",
+  "short_name": "Diamond AI",
+  "description": "Основной сайт ИИ будущего.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0a0a0f",
+  "theme_color": "#0a0a0f",
+  "icons": [
+    {
+      "src": "mp11.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ]
+}
