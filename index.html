@@ -11,6 +11,12 @@
     <meta property="og:type" content="website">
     <title>Diamond AI | ИИ</title>
 
+    <!-- Preconnect для соцсетей -->
+    <link rel="preconnect" href="https://discord.gg" crossorigin>
+    <link rel="preconnect" href="https://t.me" crossorigin>
+    <link rel="dns-prefetch" href="https://discord.gg">
+    <link rel="dns-prefetch" href="https://t.me">
+
     <!-- Favicon & PWA -->
     <link rel="icon" type="image/png" href="mp11.png">
     <link rel="apple-touch-icon" href="mp11.png">
@@ -124,7 +130,7 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <img src="mp11.png" alt="Diamond AI" class="logo-img" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23e5e7eb%22%3E%3Cpath d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/%3E%3C/svg%3E'">
+                <img src="mp11.png" alt="Diamond AI" class="logo-img" fetchpriority="high" loading="eager" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23e5e7eb%22%3E%3Cpath d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/%3E%3C/svg%3E'">
                 <span>DIAMOND AI</span>
             </div>
             <div class="nav-links">
@@ -194,7 +200,7 @@
             <div class="section-title"><span>Создатель</span> проекта</div>
             <div class="creator" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 48px; text-align: center;">
                 <div class="creator-avatar" style="width: 160px; height: 160px; border-radius: 50%; overflow: hidden; background: #1a1a22; border: 2px solid #3a3a44;">
-                    <img src="am12.png" alt="viktorshopa" loading="lazy" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%239ca3af%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E'">
+                    <img src="am12.png" alt="viktorshopa" fetchpriority="high" loading="eager" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%239ca3af%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E'">
                 </div>
                 <div class="creator-info" style="max-width:500px;">
                     <h3>viktorshopa</h3>
@@ -224,7 +230,7 @@
                 <a href="#" id="termsLink">Terms of Use</a>
                 <a href="#" id="privacyLink">Privacy Policy</a>
             </div>
-            <div class="copyright">© 2026 Diamond AI. Все права защищены. Сделано с <3 для сообщества.</div>
+            <div class="copyright">© 2026 Diamond AI. Все права защищены. Сделано с ❤️ для сообщества.</div>
         </div>
     </div>
 
@@ -353,7 +359,7 @@
             });
         });
 
-        // ========== СКАЧИВАНИЕ (Windows сразу, другие заглушка) ==========
+        // ========== СКАЧИВАНИЕ (Windows прямая ссылка, остальные заглушка) ==========
         const installModal = document.getElementById('installModal');
         const openModalBtns = [document.getElementById('installHeroBtn'), document.getElementById('headerInstallBtn')];
         const closeInstallModal = document.getElementById('closeInstallModal');
@@ -370,17 +376,16 @@
                 e.preventDefault();
                 const os = btn.dataset.os;
                 if (os === 'windows') {
-                    // Скачиваем файл Windows
-                    const fileUrl = 'DIAMOND AI-Setup-1.1.0.exe';
+                    // Ссылка на файл Windows
+                    const fileUrl = 'https://wdho.ru/891x/DIAMOND%20AI-Setup-1.1.0.exe';
                     const link = document.createElement('a');
                     link.href = fileUrl;
-                    link.download = ''; // подсказывает браузеру скачать
+                    link.download = '';
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
                     showToast('Скачивание началось!');
                 } else {
-                    // Для macOS и Linux показываем заглушку
                     showToast('Версия для ' + (os === 'macos' ? 'macOS' : 'Linux') + ' будет доступна позже');
                 }
                 closeModal(installModal);
