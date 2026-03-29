@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="Основатель сети Diamond, создатель проектов как Diamond Defender и Diamond Ai. Разработчик и отличный создатель.">
     <meta name="keywords" content="ии, искусственный интеллект, чат бот, diamond ai, нейросеть, генерация изображений">
-    <meta property="og:title" content="Diamond AI | ИИ">
+    <meta property="og:title" content="Diamond AI | 💎">
     <meta property="og:description" content="Основатель сети Diamond, создатель проектов как Diamond Defender и Diamond Ai. Разработчик и отличный создатель.">
     <meta property="og:image" content="mp11.png">
     <meta property="og:type" content="website">
-    <title>Diamond AI | ИИ</title>
+    <title>Diamond AI | 💎</title>
 
     <!-- Favicon & PWA -->
     <link rel="icon" type="image/png" href="mp11.png">
@@ -134,6 +134,7 @@
                 <a href="#faq">FAQ</a>
                 <a href="#contacts">Контакты</a>
             </div>
+            <button class="btn-primary" id="headerInstallBtn">Скачать</button>
         </div>
 
         <div class="hero">
@@ -142,7 +143,7 @@
             <div class="hero-buttons">
                 <button class="btn-primary" id="installHeroBtn">Скачать приложение</button>
                 <a href="#features" class="btn-secondary">Узнать больше →</a>
-                <a href="https://webverison.vercel.app/" class="btn-web" target="_blank" rel="noopener noreferrer">Веб версия</a>
+                <a href="https://webverison.vercel.app/" class="btn-web" target="_blank" rel="noopener noreferrer">🌐 Веб версия</a>
             </div>
         </div>
 
@@ -227,45 +228,195 @@
         </div>
     </div>
 
-    <div class="modal" id="installModal"><div class="modal-content"><i class="fas fa-download"></i><h3>Выберите платформу</h3><div class="platform-buttons"><button class="platform-btn" data-os="windows">Windows (exe)</button><button class="platform-btn" data-os="macos">macOS (dmg)</button><button class="platform-btn" data-os="linux">Linux (AppImage)</button></div><p>Скоро будут доступны для скачивания. Следите за новостями!</p><button class="modal-close" id="closeInstallModal">Закрыть</button></div></div>
+    <!-- Модалка выбора платформы -->
+    <div class="modal" id="installModal">
+        <div class="modal-content">
+            <i class="fas fa-download"></i>
+            <h3>Выберите версию</h3>
+            <div class="platform-buttons">
+                <button class="platform-btn" data-os="windows">Windows (exe)</button>
+                <button class="platform-btn" data-os="macos">macOS (dmg)</button>
+                <button class="platform-btn" data-os="linux">Linux (AppImage)</button>
+            </div>
+            <p>Для macOS и Linux версии будут доступны позже.</p>
+            <button class="modal-close" id="closeInstallModal">Закрыть</button>
+        </div>
+    </div>
+
+    <!-- Модалки Terms и Privacy -->
     <div class="modal" id="termsModal"><div class="modal-content" style="max-width:600px;text-align:left"><h3><i class="fas fa-file-contract"></i> Terms of Use</h3><div style="margin:20px 0;max-height:60vh;overflow-y:auto"><h4>1. Общие положения</h4><p>Настоящие Условия использования регулируют отношения между компанией Diamond AI и пользователем при использовании программного обеспечения «Diamond AI».</p><h4>2. Описание сервиса</h4><p>Diamond AI — интеллектуальный помощник на модели diamond-techo.vshpps. Приложение предоставляет общение с ИИ, историю диалогов, папки для организации чатов, а также генерацию изображений через «ГенХаб». Все данные хранятся локально на вашем устройстве.</p><h4>3. Контакты</h4><p>По всем вопросам: <strong>abugay12@mail.ru</strong></p></div><button class="modal-close" id="closeTermsModal">Принять и закрыть</button></div></div>
     <div class="modal" id="privacyModal"><div class="modal-content" style="max-width:600px;text-align:left"><h3><i class="fas fa-shield-alt"></i> Политика конфиденциальности</h3><div style="margin:20px 0;max-height:60vh;overflow-y:auto"><h4>1. Какие данные мы собираем</h4><p>Приложение собирает только данные, необходимые для его функционирования: локально сохранённые чаты, папки, настройки пользователя (аватар, имя), зашифрованный API-ключ OpenRouter.</p><h4>2. Как мы используем данные</h4><p>Все данные хранятся исключительно на вашем устройстве. Мы не передаём ваши данные третьим лицам.</p><h4>3. Контакты</h4><p>Вопросы по конфиденциальности: <strong>abugay12@mail.ru</strong></p></div><button class="modal-close" id="closePrivacyModal">Принять и закрыть</button></div></div>
 
     <script>
-        const demoChat = document.getElementById('demoChat'), clearBtn = document.getElementById('clearDemoChat');
-        const answers={"Что такое Diamond AI?":"Diamond AI — интеллектуальный помощник на собственной модели diamond-techo.vshpps. Я помогаю с любыми вопросами: от учёбы до творчества, поддерживаю LaTeX, код и даже умею искать информацию в интернете. Все ваши данные хранятся локально — приватность на первом месте.","Как начать работу?":"Всё просто: скачайте приложение (кнопка «Скачать» на сайте), установите его, затем при первом запуске введите API-ключ OpenRouter или используйте встроенный. После этого можно сразу задавать вопросы и создавать папки для организации чатов.","Какие возможности есть у Diamond AI?":"У меня богатый функционал: 📁 папки для сортировки чатов, 🎨 генерация изображений (ГенХаб), 📝 поддержка формул и кода, 🔒 полная приватность (данные только на вашем устройстве), а также умный поиск в интернете по запросу. И всё это — в современном тёмном интерфейсе."};
-        function addDemoMessage(r,t){let m=document.createElement('div');m.className=`demo-message ${r}`;let b=document.createElement('div');b.className='demo-bubble';b.innerText=t;m.appendChild(b);demoChat.appendChild(m);demoChat.scrollTop=demoChat.scrollHeight}
-        function showThinking(){let t=document.createElement('div');t.className='demo-message assistant';t.id='thinkingIndicator';t.innerHTML='<div class="thinking"><span></span><span></span><span></span></div>';demoChat.appendChild(t);demoChat.scrollTop=demoChat.scrollHeight}
-        function removeThinking(){let i=document.getElementById('thinkingIndicator');if(i)i.remove()}
-        document.querySelectorAll('.demo-question-btn').forEach(b=>{b.addEventListener('click',()=>{let q=b.dataset.question;if(!q)return;addDemoMessage('user',q);showThinking();setTimeout(()=>{removeThinking();addDemoMessage('assistant',answers[q]||"Ответ скоро появится. Оставайтесь на связи!");},800);})});
-        clearBtn.addEventListener('click',()=>{demoChat.innerHTML='';let w=document.createElement('div');w.className='demo-message assistant';w.innerHTML='<div class="demo-bubble">Нажмите на любой вопрос, чтобы увидеть, как я отвечаю. 🚀</div>';demoChat.appendChild(w);});
+        // ========== ИНТЕРАКТИВНАЯ ДЕМКА ==========
+        const demoChat = document.getElementById('demoChat');
+        const clearBtn = document.getElementById('clearDemoChat');
 
-        const observer=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting){entry.target.style.opacity='1';entry.target.style.transform='translateY(0)';}})},{threshold:.1});
-        document.querySelectorAll('.card, .step, .stats .stat-item').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='all 0.6s ease';observer.observe(el);});
+        const answers = {
+            "Что такое Diamond AI?": "Diamond AI — интеллектуальный помощник на собственной модели diamond-techo.vshpps. Я помогаю с любыми вопросами: от учёбы до творчества, поддерживаю LaTeX, код и даже умею искать информацию в интернете. Все ваши данные хранятся локально — приватность на первом месте.",
+            "Как начать работу?": "Всё просто: скачайте приложение (кнопка «Скачать» на сайте), установите его, затем при первом запуске введите API-ключ OpenRouter или используйте встроенный. После этого можно сразу задавать вопросы и создавать папки для организации чатов.",
+            "Какие возможности есть у Diamond AI?": "У меня богатый функционал: 📁 папки для сортировки чатов, 🎨 генерация изображений (ГенХаб), 📝 поддержка формул и кода, 🔒 полная приватность (данные только на вашем устройстве), а также умный поиск в интернете по запросу. И всё это — в современном тёмном интерфейсе."
+        };
 
-        const counters=document.querySelectorAll('.stat-number');
-        const animateCounter=el=>{let target=parseInt(el.dataset.target),current=0,increment=target/80;const update=()=>{current+=increment;if(current<target){el.innerText=Math.floor(current);requestAnimationFrame(update)}else{el.innerText=target}};update()};
-        const observerCounter=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting){animateCounter(entry.target);observerCounter.unobserve(entry.target)}})},{threshold:.5});
-        counters.forEach(c=>observerCounter.observe(c));
+        function addDemoMessage(role, text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `demo-message ${role}`;
+            const bubble = document.createElement('div');
+            bubble.className = 'demo-bubble';
+            bubble.innerText = text;
+            messageDiv.appendChild(bubble);
+            demoChat.appendChild(messageDiv);
+            demoChat.scrollTop = demoChat.scrollHeight;
+        }
 
-        document.querySelectorAll('.faq-item').forEach(item=>{item.querySelector('.faq-question').addEventListener('click',()=>{item.classList.toggle('active');})});
+        function showThinking() {
+            const thinkingDiv = document.createElement('div');
+            thinkingDiv.className = 'demo-message assistant';
+            thinkingDiv.id = 'thinkingIndicator';
+            thinkingDiv.innerHTML = '<div class="thinking"><span></span><span></span><span></span></div>';
+            demoChat.appendChild(thinkingDiv);
+            demoChat.scrollTop = demoChat.scrollHeight;
+        }
 
-        const installModal=document.getElementById('installModal'),openModalBtns=[document.getElementById('installHeroBtn')],closeInstallModal=document.getElementById('closeInstallModal');
-        function openInstallModal(){installModal.style.display='flex'}
-        function closeModal(m){m.style.display='none'}
-        openModalBtns.forEach(b=>b.addEventListener('click',openInstallModal));
-        closeInstallModal.addEventListener('click',()=>closeModal(installModal));
-        document.querySelectorAll('.platform-btn').forEach(btn=>{btn.addEventListener('click',(e)=>{e.preventDefault();showToast(`Скачивание для ${btn.dataset.os} скоро будет доступно!`);closeModal(installModal);})});
+        function removeThinking() {
+            const indicator = document.getElementById('thinkingIndicator');
+            if (indicator) indicator.remove();
+        }
 
-        const termsModal=document.getElementById('termsModal'),privacyModal=document.getElementById('privacyModal');
-        document.getElementById('termsLink').addEventListener('click',e=>{e.preventDefault();termsModal.style.display='flex'});
-        document.getElementById('privacyLink').addEventListener('click',e=>{e.preventDefault();privacyModal.style.display='flex'});
-        document.getElementById('closeTermsModal').addEventListener('click',()=>closeModal(termsModal));
-        document.getElementById('closePrivacyModal').addEventListener('click',()=>closeModal(privacyModal));
-        window.addEventListener('click',e=>{if(e.target===installModal)closeModal(installModal);if(e.target===termsModal)closeModal(termsModal);if(e.target===privacyModal)closeModal(privacyModal);});
+        document.querySelectorAll('.demo-question-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const question = btn.dataset.question;
+                if (!question) return;
+                addDemoMessage('user', question);
+                showThinking();
+                setTimeout(() => {
+                    removeThinking();
+                    addDemoMessage('assistant', answers[question] || "Ответ скоро появится. Оставайтесь на связи!");
+                }, 800);
+            });
+        });
 
-        function showToast(m){let t=document.createElement('div');t.className='toast';t.innerText=m;document.body.appendChild(t);setTimeout(()=>t.remove(),3000);}
-        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();let id=this.getAttribute('href').substring(1),target=document.getElementById(id);if(target)target.scrollIntoView({behavior:'smooth',block:'start'});})});
+        clearBtn.addEventListener('click', () => {
+            demoChat.innerHTML = '';
+            const welcomeMsg = document.createElement('div');
+            welcomeMsg.className = 'demo-message assistant';
+            welcomeMsg.innerHTML = '<div class="demo-bubble">Нажмите на любой вопрос, чтобы увидеть, как я отвечаю. 🚀</div>';
+            demoChat.appendChild(welcomeMsg);
+        });
+
+        // ========== АНИМАЦИИ И СЧЁТЧИКИ ==========
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.card, .step, .stats .stat-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        const counters = document.querySelectorAll('.stat-number');
+        const animateCounter = (el) => {
+            const target = parseInt(el.dataset.target);
+            let current = 0;
+            const increment = target / 80;
+            const update = () => {
+                current += increment;
+                if (current < target) {
+                    el.innerText = Math.floor(current);
+                    requestAnimationFrame(update);
+                } else {
+                    el.innerText = target;
+                }
+            };
+            update();
+        };
+        const observerCounter = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter(entry.target);
+                    observerCounter.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(counter => observerCounter.observe(counter));
+
+        // ========== FAQ ==========
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // ========== СКАЧИВАНИЕ (Windows сразу, другие заглушка) ==========
+        const installModal = document.getElementById('installModal');
+        const openModalBtns = [document.getElementById('installHeroBtn'), document.getElementById('headerInstallBtn')];
+        const closeInstallModal = document.getElementById('closeInstallModal');
+
+        function openModal() { installModal.style.display = 'flex'; }
+        function closeModal(modal) { modal.style.display = 'none'; }
+
+        openModalBtns.forEach(btn => btn.addEventListener('click', openModal));
+        closeInstallModal.addEventListener('click', () => closeModal(installModal));
+
+        // Обработка выбора платформы
+        document.querySelectorAll('.platform-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const os = btn.dataset.os;
+                if (os === 'windows') {
+                    // Скачиваем файл Windows
+                    const fileUrl = 'DIAMOND AI-Setup-1.1.0.exe';
+                    const link = document.createElement('a');
+                    link.href = fileUrl;
+                    link.download = ''; // подсказывает браузеру скачать
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    showToast('Скачивание началось!');
+                } else {
+                    // Для macOS и Linux показываем заглушку
+                    showToast('Версия для ' + (os === 'macos' ? 'macOS' : 'Linux') + ' будет доступна позже');
+                }
+                closeModal(installModal);
+            });
+        });
+
+        // ========== МОДАЛКИ TERMS/PRIVACY ==========
+        const termsModal = document.getElementById('termsModal');
+        const privacyModal = document.getElementById('privacyModal');
+        document.getElementById('termsLink').addEventListener('click', e => { e.preventDefault(); termsModal.style.display = 'flex'; });
+        document.getElementById('privacyLink').addEventListener('click', e => { e.preventDefault(); privacyModal.style.display = 'flex'; });
+        document.getElementById('closeTermsModal').addEventListener('click', () => closeModal(termsModal));
+        document.getElementById('closePrivacyModal').addEventListener('click', () => closeModal(privacyModal));
+        window.addEventListener('click', e => {
+            if (e.target === installModal) closeModal(installModal);
+            if (e.target === termsModal) closeModal(termsModal);
+            if (e.target === privacyModal) closeModal(privacyModal);
+        });
+
+        function showToast(message) {
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.innerText = message;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 3000);
+        }
+
+        // Плавная прокрутка
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
     </script>
 </body>
 </html>
