@@ -83,12 +83,15 @@
       text-decoration: none;
     }
 
-    .logo i {
-      font-size: 28px;
-      background: linear-gradient(135deg, #f5f5f7, #b0b0b0);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .logo img {
+      height: 42px;
+      width: auto;
+      filter: brightness(0.95);
+      transition: transform 0.2s;
+    }
+
+    .logo img:hover {
+      transform: scale(1.02);
     }
 
     .logo span {
@@ -223,6 +226,7 @@
       gap: 20px;
       justify-content: center;
       flex-wrap: wrap;
+      margin-top: 8px;
     }
 
     /* карточки фич */
@@ -280,7 +284,7 @@
       font-size: 0.95rem;
     }
 
-    /* статистика */
+    /* статистика — ровные карточки */
     .stats {
       display: flex;
       justify-content: center;
@@ -296,6 +300,9 @@
       padding: 20px 32px;
       border-radius: 40px;
       border: 1px solid rgba(180, 190, 220, 0.2);
+      flex: 1;
+      min-width: 180px;
+      max-width: 240px;
     }
 
     .stat-number {
@@ -569,15 +576,6 @@
       color: #aaa;
     }
 
-    .btn-outline-light {
-      background: transparent;
-      border: 1px solid rgba(180, 190, 210, 0.6);
-      border-radius: 40px;
-      padding: 10px 24px;
-      color: #e0e0e0;
-      transition: 0.2s;
-    }
-
     .section-title {
       font-size: 2.5rem;
       font-weight: 700;
@@ -633,12 +631,13 @@
       .hero h1 { font-size: 36px; }
       .interactive-demo { padding: 24px; }
       .stats { gap: 20px; }
-      .stat-item { padding: 12px 20px; }
+      .stat-item { padding: 12px 20px; min-width: 140px; }
       .stat-number { font-size: 2rem; }
     }
 
     @media (max-width: 480px) {
       .btn { padding: 10px 22px; font-size: 0.9rem; }
+      .hero-buttons { gap: 12px; }
     }
   </style>
 </head>
@@ -687,16 +686,18 @@
 
   <div class="wrapper">
     <div class="navbar glass glow-silver">
-      <a class="logo" href="#"><i class="fas fa-gem"></i><span>DIAMOND AI</span></a>
+      <a class="logo" href="#">
+        <img src="mp11.png" alt="Diamond AI" onerror="this.onerror=null; this.src='https://cdn.discordapp.com/attachments/1462418981825810535/1497846206385225798/111.png?ex=69ef017c&is=69edaffc&hm=bb995a330ba710ddc4db7e8874a2b2f2a455ca92ac01e147e73ca7ba14024945&'" style="height: 42px;">
+        <span>DIAMOND AI</span>
+      </a>
       <div class="burger" id="burgerMenu">
         <i class="fas fa-bars"></i>
       </div>
       <div class="nav-links" id="navLinks">
-
         <a href="#demo">Демо</a>
         <a href="#creator">Создатель</a>
         <a href="#faq">FAQ</a>
-        <span class="diamkey-btn" id="openDiamKeyBtn"><i class="fas " style="margin-right: 6px;"></i>DiamKey</span>
+        <span class="diamkey-btn" id="openDiamKeyBtn"><i class="fas fa-key" style="margin-right: 6px;"></i>DiamKey</span>
         <a href="https://discord.gg/diamondshop" target="_blank" class="discord-icon"><i class="fab fa-discord"></i></a>
       </div>
     </div>
@@ -706,7 +707,7 @@
       <p>DIAMOND AI — нейросетевой помощник на собственной модели diamond-techo.vshpps. Работает локально, защищает приватность и понимает вас с полуслова.</p>
       <div class="hero-buttons">
         <button class="btn btn-primary" id="installHeroBtn"><i class="fas fa-download"></i> Скачать приложение</button>
-        <a href="#features" class="btn" style="backgrounad: transparent;">Узнать больше →</a>
+        <a href="#features" class="btn" style="background: transparent;">Узнать больше →</a>
         <a href="https://web-diamond.vercel.app/" class="btn" target="_blank" style="background: transparent;">Веб версия</a>
       </div>
     </div>
@@ -722,7 +723,6 @@
       <div class="features">
         <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-brain"></i></div><h3>Собственная модель</h3><p>Уникальная архитектура diamond-techo.vshpps — быстрая, лёгкая, без утечек данных.</p></div>
         <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-folder-tree"></i></div><h3>Папки и сортировка</h3><p>Группируйте чаты в папки с иконками. Не теряйте важные диалоги.</p></div>
-
         <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-shield-alt"></i></div><h3>Приватность</h3><p>Все данные хранятся локально. API-ключи шифруются.</p></div>
         <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-chalkboard-user"></i></div><h3>Интеллектуальный диалог</h3><p>LaTeX, код, химические уравнения. Идеально для учёбы.</p></div>
       </div>
@@ -740,7 +740,7 @@
         <div class="demo-chat" id="demoChat">
           <div class="demo-message assistant"><div class="demo-bubble">Нажмите на любой вопрос, чтобы увидеть, как я отвечаю. 🚀</div></div>
         </div>
-        <!-- Кнопка очистки чата удалена по требованию -->
+        <!-- Кнопка очистки чата удалена -->
       </div>
     </div>
 
