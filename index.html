@@ -1,278 +1,986 @@
+<!DOCTYPE html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="Собственная ИИ, разработанная Diamond">
-    <meta name="keywords" content="ии, искусственный интеллект, чат бот, diamond ai, нейросеть, генерация изображений">
-    <meta property="og:title" content="Diamond AI | ИИ">
-    <meta property="og:description" content="Собственная ИИ, разработанная Diamond">
-    <meta property="og:image" content="mp11.png">
-    <meta property="og:type" content="website">
-    <title>Diamond AI | ИИ</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=yes">
+  <meta name="description" content="Diamond AI — интеллектуальный помощник нового поколения с E2E-шифрованием, генерацией изображений и полной приватностью.">
+  <meta name="keywords" content="ИИ, искусственный интеллект, Diamond AI, нейросеть, чат бот, генерация изображений, приватность">
+  <meta property="og:title" content="Diamond AI | Интеллект, отточенный как алмаз">
+  <meta property="og:description" content="Собственная AI-модель diamond-techo.vshpps. Локальное хранение, никаких утечек.">
+  <meta property="og:type" content="website">
+  <title>Diamond AI | Искусственный интеллект</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-    <!-- Favicon & PWA -->
-    <!-- Основная фавиконка в формате ICO (лучшая совместимость) -->
-    <link rel="icon" type="image/x-icon" href="Icon.ico">
-    <link rel="shortcut icon" type="image/x-icon" href="Icon.ico">
-    
-    <!-- Дополнительные форматы для современных браузеров и мобильных устройств -->
-    <link rel="icon" type="image/png" sizes="32x32" href="mp11.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="mp11.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="mp11.png">
-    
-    <!-- PWA манифест -->
-    <link rel="manifest" href="manifest.json">
+    body {
+      background: #0a0a0f;
+      font-family: 'Inter', sans-serif;
+      color: #e5e7eb;
+      overflow-x: hidden;
+      position: relative;
+      line-height: 1.5;
+    }
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-    <style>
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{background:#0a0a0f;font-family:'Inter',sans-serif;color:#e5e7eb;line-height:1.5;scroll-behavior:smooth;overflow-x:hidden}
-        :root{--bg-dark:#0a0a0f;--bg-card:#111116;--border-dim:#1f1f2a;--text-light:#e5e7eb;--text-muted:#9ca3af;--btn-bg:#1a1a22;--btn-hover:#2a2a33;--grad-silver:linear-gradient(135deg,#2a2a33,#1a1a22)}
-        @keyframes fadeUp{0%{opacity:0;transform:translateY(30px)}100%{opacity:1;transform:translateY(0)}}
-        @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-        @keyframes typingPulse{0%,100%{opacity:.4;transform:scale(.9)}50%{opacity:1;transform:scale(1.2)}}
-        .container{max-width:1280px;margin:0 auto;padding:0 24px}
-        .navbar{display:flex;justify-content:space-between;align-items:center;padding:24px 0;flex-wrap:wrap;gap:20px;animation:fadeUp .6s ease}
-        .logo{display:flex;align-items:center;gap:12px;font-size:28px;font-weight:800;letter-spacing:-.5px;color:var(--text-light)}
-        .logo-img{height:42px;width:auto;object-fit:contain;filter:brightness(.9);transition:transform .2s}
-        .logo-img:hover{transform:scale(1.05)}
-        .nav-links{display:flex;gap:32px}
-        .nav-links a{color:var(--text-muted);text-decoration:none;font-weight:500;transition:.2s}
-        .nav-links a:hover{color:var(--text-light);text-shadow:0 0 6px rgba(255,255,255,.2)}
-        .hero{padding:80px 0 100px;text-align:center;animation:fadeUp .7s ease .1s both}
-        .hero h1{font-size:clamp(40px,8vw,72px);font-weight:800;background:linear-gradient(135deg,#e5e7eb,#9ca3af);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:24px;letter-spacing:-1px}
-        .hero p{font-size:1.25rem;color:var(--text-muted);max-width:700px;margin:0 auto 40px}
-        .hero-buttons{display:flex;justify-content:center;gap:20px;flex-wrap:wrap}
-        .btn-primary{background:var(--grad-silver);padding:14px 36px;border-radius:40px;font-weight:600;border:1px solid var(--border-dim);cursor:pointer;transition:.3s;color:var(--text-light)}
-        .btn-primary:hover{transform:scale(1.02);background:#2a2a33;border-color:#6b6e7a;box-shadow:0 8px 20px rgba(0,0,0,.3)}
-        .btn-secondary,.btn-web{background:transparent;border:1px solid var(--border-dim);padding:14px 36px;border-radius:40px;font-weight:500;cursor:pointer;transition:.2s;color:var(--text-light);text-decoration:none;display:inline-block}
-        .btn-secondary:hover,.btn-web:hover{background:rgba(255,255,255,.03);border-color:#9ca3af;transform:translateY(-2px)}
-        .section{padding:80px 0;border-bottom:1px solid var(--border-dim)}
-        .section-title{font-size:2.5rem;font-weight:700;text-align:center;margin-bottom:56px;letter-spacing:-.5px;color:var(--text-light)}
-        .section-title span{background:linear-gradient(135deg,#e5e7eb,#9ca3af);-webkit-background-clip:text;background-clip:text;color:transparent}
-        .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:40px}
-        .card{background:var(--bg-card);border-radius:32px;padding:32px 24px;border:1px solid var(--border-dim);transition:all .3s}
-        .card:hover{transform:translateY(-8px);border-color:#3a3a44;box-shadow:0 20px 30px -12px rgba(0,0,0,.5)}
-        .card-icon{font-size:40px;background:linear-gradient(135deg,#e5e7eb,#9ca3af);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:20px}
-        .card h3{font-size:1.5rem;margin-bottom:12px}
-        .card p{color:var(--text-muted)}
-        .interactive-demo{background:linear-gradient(135deg,rgba(30,30,38,.8),rgba(20,20,28,.9));backdrop-filter:blur(2px);border-radius:40px;padding:40px;border:1px solid rgba(176,179,184,.3);transition:all .3s}
-        .interactive-demo:hover{border-color:rgba(176,179,184,.5);box-shadow:0 25px 40px -12px rgba(0,0,0,.5)}
-        .interactive-demo h3{font-size:1.8rem;margin-bottom:24px;text-align:center;background:linear-gradient(135deg,#e5e7eb,#b0b3b8);-webkit-background-clip:text;background-clip:text;color:transparent}
-        .demo-questions{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;margin-bottom:32px}
-        .demo-question-btn{background:rgba(26,26,34,.8);border:1px solid rgba(176,179,184,.3);padding:12px 28px;border-radius:60px;font-size:1rem;font-weight:500;cursor:pointer;transition:.2s;color:#e5e7eb;backdrop-filter:blur(4px)}
-        .demo-question-btn:hover{background:rgba(42,42,51,.9);border-color:rgba(176,179,184,.6);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
-        .demo-chat{background:rgba(10,10,15,.6);backdrop-filter:blur(4px);border-radius:28px;padding:28px;min-height:280px;display:flex;flex-direction:column;gap:20px;border:1px solid rgba(176,179,184,.2)}
-        .demo-message{display:flex;gap:12px;animation:fadeIn .3s ease}
-        .demo-message.user{justify-content:flex-end}
-        .demo-message.assistant{justify-content:flex-start}
-        .demo-bubble{max-width:80%;padding:14px 24px;border-radius:28px;font-size:1rem;line-height:1.5;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-        .demo-message.user .demo-bubble{background:linear-gradient(135deg,#2a2a33,#1e1e28);border:1px solid rgba(176,179,184,.3);color:#fff}
-        .demo-message.assistant .demo-bubble{background:rgba(26,26,34,.7);border:1px solid rgba(176,179,184,.3);color:var(--text-light);backdrop-filter:blur(4px)}
-        .thinking{display:flex;align-items:center;gap:8px;padding:12px 24px}
-        .thinking span{width:8px;height:8px;background:var(--text-muted);border-radius:50%;display:inline-block;animation:typingPulse 1.2s infinite}
-        .thinking span:nth-child(2){animation-delay:.2s}
-        .thinking span:nth-child(3){animation-delay:.4s}
-        .demo-clear-btn{background:rgba(26,26,34,.8);border:1px solid rgba(176,179,184,.3);padding:8px 18px;border-radius:40px;font-size:.8rem;cursor:pointer;margin-top:20px;align-self:flex-end;color:var(--text-muted);transition:.2s;backdrop-filter:blur(4px)}
-        .demo-clear-btn:hover{background:rgba(42,42,51,.9);color:var(--text-light);border-color:rgba(176,179,184,.6)}
-        .stats{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;margin:60px 0 20px}
-        .stat-item{text-align:center}
-        .stat-number{font-size:3rem;font-weight:800;background:linear-gradient(135deg,#e5e7eb,#9ca3af);-webkit-background-clip:text;background-clip:text;color:transparent}
-        .stat-label{color:var(--text-muted);font-size:.9rem;margin-top:8px}
-        .steps{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:40px}
-        .step{text-align:center;max-width:220px}
-        .step-number{width:50px;height:50px;background:var(--bg-card);border:1px solid var(--border-dim);border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.5rem;margin:0 auto 20px;background:linear-gradient(135deg,#2a2a33,#1a1a22)}
-        .step p{color:var(--text-muted)}
-        .faq-item{background:var(--bg-card);border:1px solid var(--border-dim);border-radius:20px;margin-bottom:20px;padding:20px 28px;cursor:pointer}
-        .faq-question{display:flex;justify-content:space-between;align-items:center;font-weight:600;font-size:1.1rem}
-        .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease;color:var(--text-muted)}
-        .faq-item.active .faq-answer{max-height:200px;padding-top:16px}
-        .faq-icon{transition:transform .2s}
-        .faq-item.active .faq-icon{transform:rotate(180deg)}
-        .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;z-index:1000;animation:fadeIn .2s}
-        .modal-content{background:var(--bg-card);border-radius:32px;padding:32px;max-width:480px;width:90%;text-align:center;border:1px solid var(--border-dim)}
-        .modal-content i{font-size:48px;color:var(--text-muted);margin-bottom:20px}
-        .modal-content h3{font-size:28px;margin-bottom:12px}
-        .modal-content p{margin-bottom:24px;color:var(--text-muted)}
-        .platform-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:20px 0}
-        .platform-btn{background:var(--btn-bg);border:1px solid var(--border-dim);padding:10px 20px;border-radius:40px;font-weight:500;cursor:pointer;transition:.2s;color:var(--text-light)}
-        .platform-btn:hover{background:var(--btn-hover)}
-        .modal-close{background:var(--btn-bg);border:1px solid var(--border-dim);padding:10px 20px;border-radius:40px;font-weight:500;cursor:pointer;transition:.2s;color:var(--text-light);margin-top:12px}
-        .modal-close:hover{background:var(--btn-hover)}
-        .toast{position:fixed;bottom:24px;right:24px;background:var(--bg-card);border-left:4px solid #9ca3af;padding:12px 20px;border-radius:12px;font-size:.9rem;z-index:1100;animation:fadeUp .3s;box-shadow:0 4px 12px rgba(0,0,0,.4)}
-        .footer{padding:48px 0 32px;text-align:center;border-top:1px solid var(--border-dim);margin-top:40px}
-        .footer-links{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;margin-bottom:24px}
-        .footer-links a{color:var(--text-muted);text-decoration:none;transition:.2s}
-        .footer-links a:hover{color:var(--text-light)}
-        .copyright{font-size:.85rem;color:#6b7280}
-        @media (max-width:768px){
-            .container{padding:0 20px}
-            .navbar{flex-direction:column;text-align:center}
-            .nav-links{flex-wrap:wrap;justify-content:center;gap:20px}
-            .hero{padding:50px 0 60px}
-            .stats{gap:30px}
-            .stat-number{font-size:2rem}
-            .steps{gap:24px}
-            .section{padding:50px 0}
-            .section-title{font-size:2rem;margin-bottom:40px}
-            .grid-3{gap:24px}
-            .interactive-demo{padding:24px}
-            .demo-bubble{max-width:90%}
-            .demo-question-btn{padding:8px 20px;font-size:.9rem}
-        }
-        @media (max-width:480px){
-            .hero h1{font-size:2rem}
-            .interactive-demo h3{font-size:1.5rem}
-        }
-    </style>
+    /* 3D canvas background */
+    #three-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+
+    /* контент поверх canvas */
+    .wrapper {
+      position: relative;
+      z-index: 10;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 20px 24px 40px;
+    }
+
+    /* glass-морфинг стиль как в первом макете */
+    .glass {
+      background: rgba(18, 18, 22, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(180, 180, 200, 0.2);
+      border-radius: 32px;
+      box-shadow: 0 20px 40px -16px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      transition: all 0.3s ease;
+    }
+
+    .glow-silver {
+      box-shadow: 0 0 30px rgba(180, 190, 220, 0.1), 0 20px 40px -16px rgba(0, 0, 0, 0.7);
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 28px;
+      margin-bottom: 30px;
+      border-radius: 48px;
+      animation: fadeInUp 0.7s ease both;
+      flex-wrap: wrap;
+      gap: 16px;
+      position: relative;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo i {
+      font-size: 28px;
+      background: linear-gradient(135deg, #f5f5f7, #b0b0b0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo span {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #f5f5f7, #c0c0c0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Burger menu для мобильных */
+    .burger {
+      display: none;
+      cursor: pointer;
+      font-size: 28px;
+      color: #e0e0e0;
+      transition: 0.2s;
+    }
+
+    .burger:hover {
+      color: white;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a, .nav-links .diamkey-btn {
+      color: #c0c0c0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .nav-links a::after, .nav-links .diamkey-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0;
+      height: 1.5px;
+      background: linear-gradient(90deg, transparent, #c0c0c0, transparent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after, .nav-links .diamkey-btn:hover::after {
+      width: 100%;
+    }
+
+    .nav-links a:hover, .nav-links .diamkey-btn:hover {
+      color: #ffffff;
+      text-shadow: 0 0 12px rgba(200, 200, 220, 0.5);
+    }
+
+    .discord-icon {
+      font-size: 1.4rem;
+      color: #c0c0c0;
+      transition: all 0.2s;
+    }
+
+    .discord-icon:hover {
+      color: white;
+      text-shadow: 0 0 14px rgba(180, 190, 255, 0.7);
+      transform: scale(1.05);
+    }
+
+    .btn {
+      padding: 12px 28px;
+      border-radius: 40px;
+      font-weight: 600;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(180, 190, 210, 0.35);
+      background: rgba(40, 42, 48, 0.55);
+      backdrop-filter: blur(8px);
+      color: #f0f0f0;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.7), 0 0 20px rgba(180, 190, 220, 0.25);
+      border-color: #c0c8e0;
+    }
+
+    .btn-primary {
+      background: linear-gradient(145deg, #4a4d58, #2a2c34);
+      border-color: #a0a8c0;
+    }
+
+    .hero {
+      padding: 64px 32px;
+      margin-bottom: 48px;
+      background: radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+      animation: fadeInUp 0.8s ease both;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 8vw, 80px);
+      font-weight: 800;
+      line-height: 1.1;
+      background: linear-gradient(145deg, #fafafa, #b0b0b0);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 24px;
+      letter-spacing: -1px;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #b0b0b0;
+      max-width: 700px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* карточки фич */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+      margin: 40px 0 50px;
+    }
+
+    .feature-card {
+      background: rgba(28, 30, 36, 0.55);
+      backdrop-filter: blur(12px);
+      border-radius: 32px;
+      padding: 38px 24px;
+      border: 1px solid rgba(180, 190, 220, 0.2);
+      transition: all 0.35s ease;
+      text-align: center;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.6s ease forwards;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-10px);
+      border-color: #b0b8d0;
+      box-shadow: 0 20px 30px -12px rgba(0, 0, 0, 0.6), 0 0 25px rgba(180, 190, 220, 0.15);
+    }
+
+    .feature-icon-wrap {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 72px;
+      height: 72px;
+      border-radius: 22px;
+      background: rgba(50, 55, 70, 0.5);
+      border: 1px solid rgba(180, 190, 220, 0.3);
+      margin-bottom: 22px;
+      transition: all 0.3s ease;
+    }
+
+    .feature-icon-wrap i {
+      font-size: 32px;
+      color: #c0c8e0;
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .feature-card p {
+      color: #b0b0b0;
+      font-size: 0.95rem;
+    }
+
+    /* статистика */
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin: 30px 0 60px;
+    }
+
+    .stat-item {
+      text-align: center;
+      background: rgba(22, 24, 30, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 20px 32px;
+      border-radius: 40px;
+      border: 1px solid rgba(180, 190, 220, 0.2);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .interactive-demo {
+      background: rgba(22, 24, 30, 0.7);
+      backdrop-filter: blur(12px);
+      border-radius: 40px;
+      padding: 40px;
+      border: 1px solid rgba(180, 190, 220, 0.25);
+      transition: all 0.3s;
+      margin: 40px 0;
+    }
+
+    .interactive-demo h3 {
+      font-size: 1.8rem;
+      margin-bottom: 24px;
+      text-align: center;
+      background: linear-gradient(135deg, #e5e7eb, #b0b3b8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .demo-questions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .demo-question-btn {
+      background: rgba(26, 26, 34, 0.8);
+      border: 1px solid rgba(176, 179, 184, 0.3);
+      padding: 12px 28px;
+      border-radius: 60px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #e5e7eb;
+      backdrop-filter: blur(4px);
+    }
+
+    .demo-chat {
+      background: rgba(10, 10, 15, 0.5);
+      backdrop-filter: blur(8px);
+      border-radius: 28px;
+      padding: 28px;
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      border: 1px solid rgba(176, 179, 184, 0.2);
+    }
+
+    .demo-message {
+      display: flex;
+      gap: 12px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .demo-message.user {
+      justify-content: flex-end;
+    }
+
+    .demo-message.assistant {
+      justify-content: flex-start;
+    }
+
+    .demo-bubble {
+      max-width: 80%;
+      padding: 14px 24px;
+      border-radius: 28px;
+      font-size: 1rem;
+      line-height: 1.5;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .demo-message.user .demo-bubble {
+      background: linear-gradient(135deg, #2a2a33, #1e1e28);
+      border: 1px solid rgba(176, 179, 184, 0.4);
+    }
+
+    .demo-message.assistant .demo-bubble {
+      background: rgba(26, 26, 34, 0.8);
+      border: 1px solid rgba(176, 179, 184, 0.3);
+    }
+
+    .thinking {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+    }
+
+    .thinking span {
+      width: 8px;
+      height: 8px;
+      background: #9ca3af;
+      border-radius: 50%;
+      display: inline-block;
+      animation: typingPulse 1.2s infinite;
+    }
+
+    .thinking span:nth-child(2) { animation-delay: .2s; }
+    .thinking span:nth-child(3) { animation-delay: .4s; }
+
+    @keyframes typingPulse {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .steps {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin: 40px 0;
+    }
+
+    .step {
+      text-align: center;
+      max-width: 220px;
+      background: rgba(22, 24, 30, 0.5);
+      backdrop-filter: blur(8px);
+      padding: 24px 20px;
+      border-radius: 32px;
+      border: 1px solid rgba(180, 190, 220, 0.2);
+    }
+
+    .step-number {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(145deg, #3a3c45, #1e1f28);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      margin: 0 auto 20px;
+      border: 1px solid rgba(200, 200, 220, 0.3);
+    }
+
+    .faq-item {
+      background: rgba(28, 30, 36, 0.6);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(180, 190, 220, 0.2);
+      border-radius: 24px;
+      margin-bottom: 20px;
+      padding: 20px 28px;
+      cursor: pointer;
+    }
+
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: #b0b0b0;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+      padding-top: 16px;
+    }
+
+    .footer {
+      margin-top: 60px;
+      padding: 30px 20px;
+      border-radius: 32px;
+      text-align: center;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .footer-links a {
+      color: #c0c0c0;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: #ffffff;
+    }
+
+    /* Модальные окна (DiamKey + другие) */
+    .modal {
+      display: flex;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(12px);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s;
+    }
+
+    .modal.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: rgba(22, 24, 30, 0.95);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(180, 190, 220, 0.4);
+      border-radius: 32px;
+      padding: 36px 32px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      box-shadow: 0 25px 40px -10px black;
+    }
+
+    .eco-projects {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .eco-project-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: rgba(30, 32, 38, 0.6);
+      border: 1px solid rgba(180, 190, 220, 0.25);
+      border-radius: 20px;
+      padding: 14px 18px;
+      transition: 0.2s;
+    }
+
+    .eco-project-item i {
+      font-size: 1.8rem;
+      color: #c0c8e0;
+      width: 40px;
+    }
+
+    .eco-name {
+      font-weight: 600;
+    }
+
+    .eco-desc {
+      font-size: 0.75rem;
+      color: #aaa;
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      border: 1px solid rgba(180, 190, 210, 0.6);
+      border-radius: 40px;
+      padding: 10px 24px;
+      color: #e0e0e0;
+      transition: 0.2s;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin: 50px 0 40px;
+      letter-spacing: -0.5px;
+    }
+
+    .section-title span {
+      background: linear-gradient(135deg, #e5e7eb, #9ca3af);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Медиазапросы: бургер-меню и адаптация */
+    @media (max-width: 768px) {
+      .wrapper { padding: 16px 16px 30px; }
+      .navbar { padding: 14px 20px; flex-wrap: nowrap; justify-content: space-between; }
+      .burger { display: block; }
+      .nav-links {
+        position: fixed;
+        top: 85px;
+        left: -100%;
+        width: 80%;
+        max-width: 280px;
+        height: auto;
+        background: rgba(18, 18, 22, 0.95);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 30px 24px;
+        border-radius: 28px;
+        gap: 20px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+        border: 1px solid rgba(180, 190, 220, 0.3);
+        box-shadow: 0 20px 30px -8px black;
+      }
+      .nav-links.active {
+        left: 16px;
+      }
+      .hero { padding: 40px 20px; }
+      .hero h1 { font-size: 36px; }
+      .interactive-demo { padding: 24px; }
+      .stats { gap: 20px; }
+      .stat-item { padding: 12px 20px; }
+      .stat-number { font-size: 2rem; }
+    }
+
+    @media (max-width: 480px) {
+      .btn { padding: 10px 22px; font-size: 0.9rem; }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="navbar">
-            <div class="logo">
-                <img src="mp11.png" alt="Diamond AI" class="logo-img" loading="lazy" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%23e5e7eb%22%3E%3Cpath d=%22M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5%22/%3E%3C/svg%3E'">
-                <span>DIAMOND AI</span>
-            </div>
-            <div class="nav-links">
-                <a href="#features">Возможности</a>
-                <a href="#demo">Демо</a>
-                <a href="#creator">Создатель</a>
-                <a href="#faq">FAQ</a>
-                <a href="#contacts">Контакты</a>
-            </div>
-        </div>
+  <canvas id="three-canvas"></canvas>
 
-        <div class="hero">
-            <h1>Интеллект,<br>отточенный как алмаз</h1>
-            <p>DIAMOND AI — нейросетевой помощник на собственной модели diamond-techo.vshpps. Работает локально, защищает приватность и понимает вас с полуслова.</p>
-            <div class="hero-buttons">
-                <button class="btn-primary" id="installHeroBtn">Скачать приложение</button>
-                <a href="#features" class="btn-secondary">Узнать больше →</a>
-                <a href="https://web-diamond.vercel.app/" class="btn-web" target="_blank" rel="noopener noreferrer">Веб версия</a>
-            </div>
+  <!-- DIAMKEY МОДАЛ (обязательная) -->
+  <div class="modal" id="diamkeyModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeDiamKeyModal" style="position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; color:#ccc; cursor:pointer;"><i class="fas fa-times"></i></button>
+      <i class="fas fa-key" style="font-size: 3rem; color: #c0c0c0; margin-bottom: 16px;"></i>
+      <h2>DiamKey</h2>
+      <p style="margin-bottom: 8px;">Единая система входа в экосистему Diamond</p>
+      <div class="eco-projects">
+        <div class="eco-project-item">
+          <i class="fas fa-gem"></i>
+          <div class="eco-info" style="text-align: left;">
+            <div class="eco-name">Diamond AI</div>
+            <div class="eco-desc">Искусственный интеллект нового поколения</div>
+          </div>
         </div>
+        <div class="eco-project-item">
+          <i class="fas fa-comment-dots"></i>
+          <div class="eco-info" style="text-align: left;">
+            <div class="eco-name">Dirmess</div>
+            <div class="eco-desc">Защищённый мессенджер с E2E шифрованием</div>
+          </div>
+        </div>
+        <div class="eco-project-item">
+          <i class="fas fa-unlock-alt"></i>
+          <div class="eco-info" style="text-align: left;">
+            <div class="eco-name">Unlock</div>
+            <div class="eco-desc">Обход блокировок РКН</div>
+          </div>
+        </div>
+      </div>
+      <p style="margin-bottom: 20px; color: #b0b0b0; font-size: 0.9rem;">Один аккаунт для всех проектов</p>
+      <a href="https://diamkey.ru" target="_blank" class="btn btn-primary" style="background: linear-gradient(145deg,#4a4d58,#2a2c34);"><i class="fas fa-external-link-alt"></i> Перейти на DiamKey</a>
+    </div>
+  </div>
 
-        <div class="stats" id="stats">
-            <div class="stat-item"><div class="stat-number" data-target="92">0</div><div class="stat-label">активных пользователей</div></div>
-            <div class="stat-item"><div class="stat-number" data-target="1500">0</div><div class="stat-label">сообщений сгенерировано</div></div>
-            <div class="stat-item"><div class="stat-number" data-target="100">0</div><div class="stat-label">% приватности</div></div>
-        </div>
+  <!-- Остальные модалки -->
+  <div class="modal" id="installModal"><div class="modal-content"><i class="fas fa-download"></i><h3>Выберите платформу</h3><div class="platform-buttons" style="display:flex; gap:12px; justify-content:center; margin:20px 0;"><button class="platform-btn" data-os="windows">Windows (exe)</button><button class="platform-btn" data-os="macos">macOS (dmg)</button><button class="platform-btn" data-os="linux">Linux (AppImage)</button></div><p>Скоро будут доступны для скачивания. Следите за новостями!</p><button class="modal-close" id="closeInstallModal" style="background:rgba(255,255,255,0.1); padding:8px 20px; border-radius: 40px; margin-top:12px;">Закрыть</button></div></div>
+  <div class="modal" id="termsModal"><div class="modal-content" style="max-width:600px; text-align:left"><h3><i class="fas fa-file-contract"></i> Terms of Use</h3><div style="margin:20px 0; max-height:60vh; overflow-y:auto"><h4>1. Общие положения</h4><p>Настоящие Условия использования регулируют отношения между Diamond AI и пользователем.</p><h4>2. Описание сервиса</h4><p>Diamond AI — интеллектуальный помощник на модели diamond-techo.vshpps. Все данные хранятся локально.</p><h4>3. Контакты</h4><p>abugay12@mail.ru</p></div><button class="modal-close" id="closeTermsModal">Принять и закрыть</button></div></div>
+  <div class="modal" id="privacyModal"><div class="modal-content" style="max-width:600px; text-align:left"><h3><i class="fas fa-shield-alt"></i> Политика конфиденциальности</h3><div style="margin:20px 0; max-height:60vh; overflow-y:auto"><h4>1. Данные</h4><p>Хранятся локально: чаты, ключи, настройки. Не передаются третьим лицам.</p><h4>2. Контакты</h4><p>abugay12@mail.ru</p></div><button class="modal-close" id="closePrivacyModal">Принять и закрыть</button></div></div>
 
-        <div class="section" id="features">
-            <div class="section-title">Почему <span>DIAMOND AI</span>?</div>
-            <div class="grid-3">
-                <div class="card"><div class="card-icon"><i class="fas fa-brain"></i></div><h3>Собственная модель</h3><p>Уникальная архитектура diamond-techo.vshpps — быстрая, лёгкая, без утечек данных.</p></div>
-                <div class="card"><div class="card-icon"><i class="fas fa-folder-tree"></i></div><h3>Папки и сортировка</h3><p>Группируйте чаты в папки с иконками и цветами. Не теряйте важные диалоги.</p></div>
-                <div class="card"><div class="card-icon"><i class="fas fa-image"></i></div><h3>Генерация изображений</h3><p>Встроенный ГенХаб — создавайте картинки через Diamond Photo API. Уже в разработке.</p></div>
-                <div class="card"><div class="card-icon"><i class="fas fa-shield-alt"></i></div><h3>Приватность</h3><p>Все данные хранятся локально. API-ключи шифруются. Никто не увидит ваши чаты.</p></div>
-                <div class="card"><div class="card-icon"><i class="fas fa-chalkboard-user"></i></div><h3>Интеллектуальный диалог</h3><p>Поддержка LaTeX, кода, химических уравнений. Идеально для учёбы и работы.</p></div>
-                <div class="card"><div class="card-icon"><i class="fas fa-cloud-upload-alt"></i></div><h3>Автообновления</h3><p>Новые функции и исправления приходят автоматически.</p></div>
-            </div>
-        </div>
+  <div class="wrapper">
+    <div class="navbar glass glow-silver">
+      <a class="logo" href="#"><i class="fas fa-gem"></i><span>DIAMOND AI</span></a>
+      <div class="burger" id="burgerMenu">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="navLinks">
 
-        <div class="section" id="demo">
-            <div class="section-title">Интерфейс <span>будущего</span></div>
-            <div class="interactive-demo">
-                <h3>✨ Попробуйте сами</h3>
-                <div class="demo-questions">
-                    <button class="demo-question-btn" data-question="Что такое Diamond AI?">Что такое Diamond AI?</button>
-                    <button class="demo-question-btn" data-question="Как начать работу?">Как начать работу?</button>
-                    <button class="demo-question-btn" data-question="Какие возможности есть у Diamond AI?">Какие возможности?</button>
-                </div>
-                <div class="demo-chat" id="demoChat">
-                    <div class="demo-message assistant"><div class="demo-bubble">Нажмите на любой вопрос, чтобы увидеть, как я отвечаю. 🚀</div></div>
-                </div>
-                <button class="demo-clear-btn" id="clearDemoChat">Очистить чат</button>
-            </div>
-        </div>
-
-        <div class="section">
-            <div class="section-title">Начать <span>просто</span></div>
-            <div class="steps">
-                <div class="step"><div class="step-number">1</div><p>Скачайте приложение для вашей платформы</p></div>
-                <div class="step"><div class="step-number">2</div><p>Введите API-ключ OpenRouter или используйте встроенный</p></div>
-                <div class="step"><div class="step-number">3</div><p>Начинайте диалог с ИИ и организуйте чаты в папки</p></div>
-            </div>
-        </div>
-
-        <div class="section" id="creator">
-            <div class="section-title"><span>Создатель</span> проекта</div>
-            <div class="creator" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 48px; text-align: center;">
-                <div class="creator-avatar" style="width: 160px; height: 160px; border-radius: 50%; overflow: hidden; background: #1a1a22; border: 2px solid #3a3a44;">
-                    <img src="am12.png" alt="viktorshopa" loading="lazy" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%239ca3af%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E'">
-                </div>
-                <div class="creator-info" style="max-width:500px;">
-                    <h3>viktorshopa</h3>
-                    <p>Основатель сети Diamond, создатель проектов как Diamond Defender и Diamond Ai. Разработчик и отличный создатель.</p>
-                    <div class="social-links" style="display:flex; gap:20px; justify-content:center; margin-top:20px;">
-                        <a href="https://discord.gg/diamondshop" target="_blank"><i class="fab fa-discord"></i></a>
-                        <a href="https://t.me/vshpps" target="_blank"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section" id="faq">
-            <div class="section-title">Часто задаваемые <span>вопросы</span></div>
-            <div class="faq-list">
-                <div class="faq-item"><div class="faq-question"><span>Как установить DIAMOND AI?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Нажмите кнопку «Скачать» на сайте, выберите вашу операционную систему, и установочный файл будет загружен. После установки запустите приложение и следуйте инструкции.</div></div>
-                <div class="faq-item"><div class="faq-question"><span>Нужен ли API-ключ?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Для чата требуется API-ключ OpenRouter. Вы можете использовать свой или встроенный (с ограничениями). Для генерации изображений используется собственный Diamond Photo API.</div></div>
-                <div class="faq-item"><div class="faq-question"><span>Можно ли использовать без интернета?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Для работы AI необходим интернет (вызов API). Однако все ваши чаты и настройки сохраняются локально.</div></div>
-                <div class="faq-item"><div class="faq-question"><span>Планируется ли мобильная версия?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Да, в планах — адаптивное веб-приложение и нативные мобильные клиенты. Следите за анонсами в Discord.</div></div>
-            </div>
-        </div>
-
-        <div class="footer" id="contacts">
-            <div class="footer-links">
-                <a href="https://discord.gg/diamondshop" target="_blank">Discord-сервер</a>
-                <a href="https://t.me/vshpps" target="_blank">Telegram</a>
-                <a href="#" id="termsLink">Terms of Use</a>
-                <a href="#" id="privacyLink">Privacy Policy</a>
-            </div>
-            <div class="copyright">© 2026 Diamond AI. Все права защищены. Сделано с ❤️ для сообщества.</div>
-        </div>
+        <a href="#demo">Демо</a>
+        <a href="#creator">Создатель</a>
+        <a href="#faq">FAQ</a>
+        <span class="diamkey-btn" id="openDiamKeyBtn"><i class="fas " style="margin-right: 6px;"></i>DiamKey</span>
+        <a href="https://discord.gg/diamondshop" target="_blank" class="discord-icon"><i class="fab fa-discord"></i></a>
+      </div>
     </div>
 
-    <div class="modal" id="installModal"><div class="modal-content"><i class="fas fa-download"></i><h3>Выберите платформу</h3><div class="platform-buttons"><button class="platform-btn" data-os="windows">Windows (exe)</button><button class="platform-btn" data-os="macos">macOS (dmg)</button><button class="platform-btn" data-os="linux">Linux (AppImage)</button></div><p>Скоро будут доступны для скачивания. Следите за новостями!</p><button class="modal-close" id="closeInstallModal">Закрыть</button></div></div>
-    <div class="modal" id="termsModal"><div class="modal-content" style="max-width:600px;text-align:left"><h3><i class="fas fa-file-contract"></i> Terms of Use</h3><div style="margin:20px 0;max-height:60vh;overflow-y:auto"><h4>1. Общие положения</h4><p>Настоящие Условия использования регулируют отношения между компанией Diamond AI и пользователем при использовании программного обеспечения «Diamond AI».</p><h4>2. Описание сервиса</h4><p>Diamond AI — интеллектуальный помощник на модели diamond-techo.vshpps. Приложение предоставляет общение с ИИ, историю диалогов, папки для организации чатов, а также генерацию изображений через «ГенХаб». Все данные хранятся локально на вашем устройстве.</p><h4>3. Контакты</h4><p>По всем вопросам: <strong>abugay12@mail.ru</strong></p></div><button class="modal-close" id="closeTermsModal">Принять и закрыть</button></div></div>
-    <div class="modal" id="privacyModal"><div class="modal-content" style="max-width:600px;text-align:left"><h3><i class="fas fa-shield-alt"></i> Политика конфиденциальности</h3><div style="margin:20px 0;max-height:60vh;overflow-y:auto"><h4>1. Какие данные мы собираем</h4><p>Приложение собирает только данные, необходимые для его функционирования: локально сохранённые чаты, папки, настройки пользователя (аватар, имя), зашифрованный API-ключ OpenRouter.</p><h4>2. Как мы используем данные</h4><p>Все данные хранятся исключительно на вашем устройстве. Мы не передаём ваши данные третьим лицам.</p><h4>3. Контакты</h4><p>Вопросы по конфиденциальности: <strong>abugay12@mail.ru</strong></p></div><button class="modal-close" id="closePrivacyModal">Принять и закрыть</button></div></div>
+    <div class="hero glass glow-silver">
+      <h1>Интеллект,<br>отточенный как алмаз</h1>
+      <p>DIAMOND AI — нейросетевой помощник на собственной модели diamond-techo.vshpps. Работает локально, защищает приватность и понимает вас с полуслова.</p>
+      <div class="hero-buttons">
+        <button class="btn btn-primary" id="installHeroBtn"><i class="fas fa-download"></i> Скачать приложение</button>
+        <a href="#features" class="btn" style="backgrounad: transparent;">Узнать больше →</a>
+        <a href="https://web-diamond.vercel.app/" class="btn" target="_blank" style="background: transparent;">Веб версия</a>
+      </div>
+    </div>
 
-    <script>
-        const demoChat = document.getElementById('demoChat'), clearBtn = document.getElementById('clearDemoChat');
-        const answers={"Что такое Diamond AI?":"Diamond AI — интеллектуальный помощник на собственной модели diamond-techo.vshpps. Я помогаю с любыми вопросами: от учёбы до творчества, поддерживаю LaTeX, код и даже умею искать информацию в интернете. Все ваши данные хранятся локально — приватность на первом месте.","Как начать работу?":"Всё просто: скачайте приложение (кнопка «Скачать» на сайте), установите его, затем при первом запуске введите API-ключ OpenRouter или используйте встроенный. После этого можно сразу задавать вопросы и создавать папки для организации чатов.","Какие возможности есть у Diamond AI?":"У меня богатый функционал: 📁 папки для сортировки чатов, 🎨 генерация изображений (ГенХаб), 📝 поддержка формул и кода, 🔒 полная приватность (данные только на вашем устройстве), а также умный поиск в интернете по запросу. И всё это — в современном тёмном интерфейсе."};
-        function addDemoMessage(r,t){let m=document.createElement('div');m.className=`demo-message ${r}`;let b=document.createElement('div');b.className='demo-bubble';b.innerText=t;m.appendChild(b);demoChat.appendChild(m);demoChat.scrollTop=demoChat.scrollHeight}
-        function showThinking(){let t=document.createElement('div');t.className='demo-message assistant';t.id='thinkingIndicator';t.innerHTML='<div class="thinking"><span></span><span></span><span></span></div>';demoChat.appendChild(t);demoChat.scrollTop=demoChat.scrollHeight}
-        function removeThinking(){let i=document.getElementById('thinkingIndicator');if(i)i.remove()}
-        document.querySelectorAll('.demo-question-btn').forEach(b=>{b.addEventListener('click',()=>{let q=b.dataset.question;if(!q)return;addDemoMessage('user',q);showThinking();setTimeout(()=>{removeThinking();addDemoMessage('assistant',answers[q]||"Ответ скоро появится. Оставайтесь на связи!");},800);})});
-        clearBtn.addEventListener('click',()=>{demoChat.innerHTML='';let w=document.createElement('div');w.className='demo-message assistant';w.innerHTML='<div class="demo-bubble">Нажмите на любой вопрос, чтобы увидеть, как я отвечаю. 🚀</div>';demoChat.appendChild(w);});
+    <div class="stats" id="stats">
+      <div class="stat-item"><div class="stat-number" data-target="94">0</div><div class="stat-label">активных пользователей</div></div>
+      <div class="stat-item"><div class="stat-number" data-target="1580">0</div><div class="stat-label">сообщений сгенерировано</div></div>
+      <div class="stat-item"><div class="stat-number" data-target="100">0</div><div class="stat-label">% приватности</div></div>
+    </div>
 
-        const observer=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting){entry.target.style.opacity='1';entry.target.style.transform='translateY(0)';}})},{threshold:.1});
-        document.querySelectorAll('.card, .step, .stats .stat-item').forEach(el=>{el.style.opacity='0';el.style.transform='translateY(20px)';el.style.transition='all 0.6s ease';observer.observe(el);});
+    <div class="section" id="features">
+      <div class="section-title">Почему <span>DIAMOND AI</span>?</div>
+      <div class="features">
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-brain"></i></div><h3>Собственная модель</h3><p>Уникальная архитектура diamond-techo.vshpps — быстрая, лёгкая, без утечек данных.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-folder-tree"></i></div><h3>Папки и сортировка</h3><p>Группируйте чаты в папки с иконками. Не теряйте важные диалоги.</p></div>
 
-        const counters=document.querySelectorAll('.stat-number');
-        const animateCounter=el=>{let target=parseInt(el.dataset.target),current=0,increment=target/80;const update=()=>{current+=increment;if(current<target){el.innerText=Math.floor(current);requestAnimationFrame(update)}else{el.innerText=target}};update()};
-        const observerCounter=new IntersectionObserver(e=>{e.forEach(entry=>{if(entry.isIntersecting){animateCounter(entry.target);observerCounter.unobserve(entry.target)}})},{threshold:.5});
-        counters.forEach(c=>observerCounter.observe(c));
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-shield-alt"></i></div><h3>Приватность</h3><p>Все данные хранятся локально. API-ключи шифруются.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-chalkboard-user"></i></div><h3>Интеллектуальный диалог</h3><p>LaTeX, код, химические уравнения. Идеально для учёбы.</p></div>
+      </div>
+    </div>
 
-        document.querySelectorAll('.faq-item').forEach(item=>{item.querySelector('.faq-question').addEventListener('click',()=>{item.classList.toggle('active');})});
+    <div class="section" id="demo">
+      <div class="section-title">Интерфейс <span>будущего</span></div>
+      <div class="interactive-demo">
+        <h3>✨ Попробуйте сами</h3>
+        <div class="demo-questions">
+          <button class="demo-question-btn" data-question="Что такое Diamond AI?">Что такое Diamond AI?</button>
+          <button class="demo-question-btn" data-question="Как начать работу?">Как начать работу?</button>
+          <button class="demo-question-btn" data-question="Какие возможности есть у Diamond AI?">Какие возможности?</button>
+        </div>
+        <div class="demo-chat" id="demoChat">
+          <div class="demo-message assistant"><div class="demo-bubble">Нажмите на любой вопрос, чтобы увидеть, как я отвечаю. 🚀</div></div>
+        </div>
+        <!-- Кнопка очистки чата удалена по требованию -->
+      </div>
+    </div>
 
-        const installModal=document.getElementById('installModal'),openModalBtns=[document.getElementById('installHeroBtn')],closeInstallModal=document.getElementById('closeInstallModal');
-        function openInstallModal(){installModal.style.display='flex'}
-        function closeModal(m){m.style.display='none'}
-        openModalBtns.forEach(b=>b.addEventListener('click',openInstallModal));
-        closeInstallModal.addEventListener('click',()=>closeModal(installModal));
-        document.querySelectorAll('.platform-btn').forEach(btn=>{btn.addEventListener('click',(e)=>{e.preventDefault();showToast(`Скачивание для ${btn.dataset.os} скоро будет доступно!`);closeModal(installModal);})});
+    <div class="section">
+      <div class="section-title">Начать <span>просто</span></div>
+      <div class="steps">
+        <div class="step"><div class="step-number">1</div><p>Скачайте приложение для вашей платформы</p></div>
+        <div class="step"><div class="step-number">2</div><p>Введите API-ключ OpenRouter или используйте встроенный</p></div>
+        <div class="step"><div class="step-number">3</div><p>Начинайте диалог с ИИ и организуйте чаты в папки</p></div>
+      </div>
+    </div>
 
-        const termsModal=document.getElementById('termsModal'),privacyModal=document.getElementById('privacyModal');
-        document.getElementById('termsLink').addEventListener('click',e=>{e.preventDefault();termsModal.style.display='flex'});
-        document.getElementById('privacyLink').addEventListener('click',e=>{e.preventDefault();privacyModal.style.display='flex'});
-        document.getElementById('closeTermsModal').addEventListener('click',()=>closeModal(termsModal));
-        document.getElementById('closePrivacyModal').addEventListener('click',()=>closeModal(privacyModal));
-        window.addEventListener('click',e=>{if(e.target===installModal)closeModal(installModal);if(e.target===termsModal)closeModal(termsModal);if(e.target===privacyModal)closeModal(privacyModal);});
+    <div class="section" id="creator">
+      <div class="section-title"><span>Создатель</span> проекта</div>
+      <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 48px; text-align: center; background: rgba(20,22,28,0.5); backdrop-filter: blur(12px); border-radius: 48px; padding: 40px 20px; border:1px solid rgba(180,190,220,0.2);">
+        <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; background: #1a1a22; border: 2px solid #5a5e72;">
+          <img src="am12.png" alt="viktorshopa" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%239ca3af%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E'">
+        </div>
+        <div style="max-width:500px;">
+          <h3 style="font-size: 1.8rem;">viktorshopa</h3>
+          <p style="color: #ccc;">Создатель всея экосистемы Diamond. Разработчик Diamond Defender, Diamond AI и вдохновитель сообщества.</p>
+          <div style="display:flex; gap:20px; justify-content:center; margin-top:20px;">
+            <a href="https://discord.gg/diamondshop" target="_blank" style="color:#c0c0c0; font-size: 1.5rem;"><i class="fab fa-discord"></i></a>
+            <a href="https://t.me/vshpps" target="_blank" style="color:#c0c0c0; font-size: 1.5rem;"><i class="fab fa-telegram"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        function showToast(m){let t=document.createElement('div');t.className='toast';t.innerText=m;document.body.appendChild(t);setTimeout(()=>t.remove(),3000);}
-        document.querySelectorAll('a[href^="#"]').forEach(anchor=>{anchor.addEventListener('click',function(e){e.preventDefault();let id=this.getAttribute('href').substring(1),target=document.getElementById(id);if(target)target.scrollIntoView({behavior:'smooth',block:'start'});})});
-    </script>
+    <div class="section" id="faq">
+      <div class="section-title">Часто задаваемые <span>вопросы</span></div>
+      <div class="faq-list">
+        <div class="faq-item"><div class="faq-question"><span>Как установить DIAMOND AI?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Нажмите «Скачать» на сайте, выберите вашу ОС. После установки запустите приложение.</div></div>
+        <div class="faq-item"><div class="faq-question"><span>Нужен ли API-ключ?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Для чата требуется ключ OpenRouter. Можно использовать встроенный (с ограничениями).</div></div>
+        <div class="faq-item"><div class="faq-question"><span>Можно ли использовать без интернета?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Для работы AI нужен интернет, но все чаты сохраняются локально.</div></div>
+      </div>
+    </div>
+
+    <div class="footer glass" id="contacts">
+      <div class="footer-links">
+        <a href="https://discord.gg/diamondshop" target="_blank">Discord-сервер</a>
+        <a href="https://t.me/vshpps" target="_blank">Telegram</a>
+        <a href="#" id="termsLink">Terms of Use</a>
+        <a href="#" id="privacyLink">Privacy Policy</a>
+      </div>
+      <div class="copyright">© 2026 Diamond. Все права защищены.</div>
+    </div>
+  </div>
+
+  <script type="importmap">
+    { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    const canvas = document.getElementById('three-canvas');
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    const scene = new THREE.Scene();
+    scene.background = null;
+    scene.fog = new THREE.FogExp2(0x0a0a0f, 0.0012);
+    const camera = new THREE.PerspectiveCamera(42, window.innerWidth / window.innerHeight, 0.1, 50);
+    camera.position.set(3, 1.8, 5.5);
+    camera.lookAt(0, 0, 0);
+
+    const ambient = new THREE.AmbientLight(0x404060);
+    scene.add(ambient);
+    const dirLight = new THREE.DirectionalLight(0xd0d0ff, 0.75);
+    dirLight.position.set(5, 8, 6);
+    dirLight.castShadow = true;
+    scene.add(dirLight);
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const torusGeo = new THREE.TorusGeometry(1.05, 0.07, 48, 120);
+    const torusMat = new THREE.MeshStandardMaterial({ color: 0xccccdd, roughness: 0.25, metalness: 0.85 });
+    const torus = new THREE.Mesh(torusGeo, torusMat);
+    torus.castShadow = true;
+    torus.rotation.x = Math.PI / 3;
+    group.add(torus);
+
+    const torus2Geo = new THREE.TorusGeometry(0.85, 0.05, 48, 100);
+    const torus2Mat = new THREE.MeshStandardMaterial({ color: 0xbbbbdd, roughness: 0.3, metalness: 0.9 });
+    const torus2 = new THREE.Mesh(torus2Geo, torus2Mat);
+    torus2.castShadow = true;
+    torus2.rotation.z = Math.PI / 2;
+    torus2.rotation.x = Math.PI / 4;
+    group.add(torus2);
+
+    const diamondGeo = new THREE.OctahedronGeometry(0.48);
+    const diamondMat = new THREE.MeshStandardMaterial({ color: 0xaaccff, roughness: 0.15, metalness: 0.5, emissive: 0x111133 });
+    const diamond = new THREE.Mesh(diamondGeo, diamondMat);
+    diamond.castShadow = true;
+    diamond.position.set(0.85, 0.6, 0.4);
+    group.add(diamond);
+
+    const lockGroup = new THREE.Group();
+    const bodyGeo = new THREE.BoxGeometry(0.42, 0.58, 0.32);
+    const bodyMat = new THREE.MeshStandardMaterial({ color: 0xddddff, roughness: 0.4, metalness: 0.7 });
+    const bodyLock = new THREE.Mesh(bodyGeo, bodyMat);
+    lockGroup.add(bodyLock);
+    const shackleGeo = new THREE.TorusGeometry(0.22, 0.05, 16, 32);
+    const shackleMat = new THREE.MeshStandardMaterial({ color: 0xe0e0ff, roughness: 0.3, metalness: 0.8 });
+    const shackle = new THREE.Mesh(shackleGeo, shackleMat);
+    shackle.position.y = 0.38;
+    shackle.rotation.x = Math.PI / 2;
+    lockGroup.add(shackle);
+    lockGroup.position.set(-0.75, 0.5, -0.3);
+    group.add(lockGroup);
+
+    const starsGeo = new THREE.BufferGeometry();
+    const starsCount = 180;
+    const starsPos = new Float32Array(starsCount * 3);
+    for (let i = 0; i < starsCount * 3; i += 3) {
+      starsPos[i] = (Math.random() - 0.5) * 6;
+      starsPos[i+1] = (Math.random() - 0.5) * 4;
+      starsPos[i+2] = (Math.random() - 0.5) * 4;
+    }
+    starsGeo.setAttribute('position', new THREE.BufferAttribute(starsPos, 3));
+    const starsMatPts = new THREE.PointsMaterial({ color: 0xc0c0ff, size: 0.025, blending: THREE.AdditiveBlending });
+    const starsPoints = new THREE.Points(starsGeo, starsMatPts);
+    group.add(starsPoints);
+
+    function animate3d() {
+      requestAnimationFrame(animate3d);
+      group.rotation.y += 0.002;
+      group.rotation.x = Math.sin(Date.now() * 0.0005) * 0.04;
+      diamond.rotation.y += 0.012;
+      diamond.rotation.x = Math.sin(Date.now() * 0.002) * 0.2;
+      lockGroup.rotation.y += 0.006;
+      renderer.render(scene, camera);
+    }
+    animate3d();
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  </script>
+
+  <script>
+    // бургер меню
+    const burger = document.getElementById('burgerMenu');
+    const navLinks = document.getElementById('navLinks');
+    burger.addEventListener('click', () => {
+      navLinks.classList.toggle('active');
+    });
+    document.addEventListener('click', (e) => {
+      if (!navLinks.contains(e.target) && !burger.contains(e.target) && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+      }
+    });
+
+    // интерактивность demo
+    const demoChat = document.getElementById('demoChat');
+    const answers = {
+      "Что такое Diamond AI?": "Diamond AI — интеллектуальный помощник на собственной модели diamond-techo.vshpps. Я помогаю с любыми вопросами: от учёбы до творчества, поддерживаю LaTeX, код и даже умею искать информацию в интернете.",
+      "Как начать работу?": "Скачайте приложение (кнопка «Скачать»), установите, введите API-ключ OpenRouter или используйте встроенный. После этого можно задавать вопросы и создавать папки для чатов.",
+      "Какие возможности есть у Diamond AI?": "Папки для сортировки, генерация изображений (ГенХаб), поддержка формул и кода, полная приватность, умный поиск в интернете и современный тёмный интерфейс."
+    };
+    function addDemoMsg(role, text) {
+      let msgDiv = document.createElement('div');
+      msgDiv.className = `demo-message ${role}`;
+      let bubble = document.createElement('div');
+      bubble.className = 'demo-bubble';
+      bubble.innerText = text;
+      msgDiv.appendChild(bubble);
+      demoChat.appendChild(msgDiv);
+      demoChat.scrollTop = demoChat.scrollHeight;
+    }
+    function showThinking() {
+      let thinkDiv = document.createElement('div');
+      thinkDiv.className = 'demo-message assistant';
+      thinkDiv.id = 'thinkingIndicator';
+      thinkDiv.innerHTML = '<div class="thinking"><span></span><span></span><span></span></div>';
+      demoChat.appendChild(thinkDiv);
+      demoChat.scrollTop = demoChat.scrollHeight;
+    }
+    function removeThinking() { let el = document.getElementById('thinkingIndicator'); if(el) el.remove(); }
+    document.querySelectorAll('.demo-question-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        let q = btn.dataset.question;
+        if(!q) return;
+        addDemoMsg('user', q);
+        showThinking();
+        setTimeout(() => {
+          removeThinking();
+          addDemoMsg('assistant', answers[q] || "Скоро появится полноценный ответ! Ожидайте обновления.");
+        }, 700);
+      });
+    });
+
+    const counters = document.querySelectorAll('.stat-number');
+    const animateCounter = (el) => {
+      let target = parseInt(el.dataset.target), current = 0, increment = target / 70;
+      const update = () => {
+        current += increment;
+        if(current < target) { el.innerText = Math.floor(current); requestAnimationFrame(update); }
+        else el.innerText = target;
+      };
+      update();
+    };
+    const observerCounter = new IntersectionObserver((entries) => {
+      entries.forEach(entry => { if(entry.isIntersecting) { animateCounter(entry.target); observerCounter.unobserve(entry.target); } });
+    }, { threshold: 0.4 });
+    counters.forEach(c => observerCounter.observe(c));
+
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
+    });
+
+    // Модалки
+    const diamKeyModal = document.getElementById('diamkeyModal');
+    document.getElementById('openDiamKeyBtn').addEventListener('click', () => diamKeyModal.classList.add('active'));
+    document.getElementById('closeDiamKeyModal').addEventListener('click', () => diamKeyModal.classList.remove('active'));
+    window.addEventListener('click', (e) => { if(e.target === diamKeyModal) diamKeyModal.classList.remove('active'); });
+
+    const installModal = document.getElementById('installModal');
+    document.getElementById('installHeroBtn').addEventListener('click', () => installModal.style.display = 'flex');
+    document.getElementById('closeInstallModal').addEventListener('click', () => installModal.style.display = 'none');
+    document.querySelectorAll('.platform-btn').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); alert(`Скачивание для ${btn.dataset.os} скоро будет доступно!`); installModal.style.display = 'none'; }));
+
+    const termsModal = document.getElementById('termsModal'), privacyModal = document.getElementById('privacyModal');
+    document.getElementById('termsLink').addEventListener('click', (e) => { e.preventDefault(); termsModal.style.display = 'flex'; });
+    document.getElementById('privacyLink').addEventListener('click', (e) => { e.preventDefault(); privacyModal.style.display = 'flex'; });
+    document.getElementById('closeTermsModal').addEventListener('click', () => termsModal.style.display = 'none');
+    document.getElementById('closePrivacyModal').addEventListener('click', () => privacyModal.style.display = 'none');
+    window.addEventListener('click', (e) => { if(e.target === installModal) installModal.style.display = 'none'; if(e.target === termsModal) termsModal.style.display = 'none'; if(e.target === privacyModal) privacyModal.style.display = 'none'; });
+    
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e){
+        let href = this.getAttribute('href');
+        if(href === "#") return;
+        e.preventDefault();
+        let targetId = href.substring(1);
+        let target = document.getElementById(targetId);
+        if(target) target.scrollIntoView({ behavior: 'smooth' });
+        if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+      });
+    });
+  </script>
 </body>
 </html>
