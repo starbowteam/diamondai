@@ -671,8 +671,19 @@
     </div>
   </div>
 
-  <!-- Модалка установки (отключена, только информационная) -->
-  <div class="modal" id="installModal"><div class="modal-content"><i class="fas fa-download"></i><h3>Скачать приложение</h3><p>Десктопные версии в разработке. Следите за новостями в Discord!</p><button class="modal-close" id="closeInstallModal" style="background:rgba(255,255,255,0.1); padding:8px 20px; border-radius: 40px; margin-top:12px;">Закрыть</button></div></div>
+  <!-- Модалка "Скоро будет" (вместо модалки установки) -->
+  <div class="modal" id="soonModal">
+    <div class="modal-content">
+      <button class="modal-close" id="closeSoonModal" style="position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; color:#ccc; cursor:pointer;"><i class="fas fa-times"></i></button>
+      <i class="fas fa-hourglass-half" style="font-size: 3rem; color: #c0c0c0; margin-bottom: 16px;"></i>
+      <h2>Скоро будет!</h2>
+      <p style="margin: 20px 0;">Десктопные версии Diamond AI сейчас в активной разработке.</p>
+      <p>Следите за новостями в нашем <a href="https://discord.gg/diamondshop" target="_blank" style="color:#c0c8e0;">Discord-сервере</a> или Telegram-канале.</p>
+      <button class="btn btn-primary" id="closeSoonModalBtn" style="margin-top: 24px;">Закрыть</button>
+    </div>
+  </div>
+
+  <!-- Остальные модалки (Terms, Privacy) -->
   <div class="modal" id="termsModal"><div class="modal-content" style="max-width:600px; text-align:left"><h3><i class="fas fa-file-contract"></i> Terms of Use</h3><div style="margin:20px 0; max-height:60vh; overflow-y:auto"><h4>1. Общие положения</h4><p>Настоящие Условия использования регулируют отношения между Diamond AI и пользователем.</p><h4>2. Описание сервиса</h4><p>Diamond AI — интеллектуальный помощник, использующий передовые LLM. Все данные хранятся локально или синхронизируются через DiamKey.</p><h4>3. Контакты</h4><p>abugay12@mail.ru</p></div><button class="modal-close" id="closeTermsModal">Принять и закрыть</button></div></div>
   <div class="modal" id="privacyModal"><div class="modal-content" style="max-width:600px; text-align:left"><h3><i class="fas fa-shield-alt"></i> Политика конфиденциальности</h3><div style="margin:20px 0; max-height:60vh; overflow-y:auto"><h4>1. Данные</h4><p>Чаты, папки и настройки хранятся локально и синхронизируются через DiamKey. Данные не передаются третьим лицам.</p><h4>2. Контакты</h4><p>abugay12@mail.ru</p></div><button class="modal-close" id="closePrivacyModal">Принять и закрыть</button></div></div>
 
@@ -689,16 +700,16 @@
         <a href="#demo">Демо</a>
         <a href="#creator">Создатель</a>
         <a href="#faq">FAQ</a>
-        <span class="diamkey-btn" id="openDiamKeyBtn"><i class="" style="margin-right: 6px;"></i>DiamKey</span>
+        <span class="diamkey-btn" id="openDiamKeyBtn"><i class="fas fa-key" style="margin-right: 6px;"></i>DiamKey</span>
         <a href="https://discord.gg/diamondshop" target="_blank" class="discord-icon"><i class="fab fa-discord"></i></a>
       </div>
     </div>
 
     <div class="hero glass glow-silver">
       <h1>Интеллект,<br>отточенный как алмаз</h1>
-      <p>DIAMOND AI — ИИ, работающий на собствнной модели, созданный для помощи каждому человеку на любой стороне света, бесплатный - для каждого!</p>
+      <p>DIAMOND AI — ИИ, работающий на собственной модели, созданный для помощи каждому человеку на любой стороне света, бесплатный — для каждого!</p>
       <div class="hero-buttons">
-        <button class="btn btn-primary" id="installHeroBtn"><i class="fas fa-download"></i> Скоро</button>
+        <button class="btn btn-primary" id="soonHeroBtn"><i class="fas fa-star"></i> Волшебство грядёт</button>
         <a href="#features" class="btn" style="background: transparent;">Узнать больше →</a>
         <a href="https://web-diamond.vercel.app/" class="btn" target="_blank" style="background: transparent;">Веб версия</a>
       </div>
@@ -713,16 +724,15 @@
     <div class="section" id="features">
       <div class="section-title">Почему <span>DIAMOND AI</span>?</div>
       <div class="features">
-        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-brain"></i></div><h3>Своя модель</h3><p>Использует diamond-model-ai.fast для быстрых и точных ответов. </p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-brain"></i></div><h3>Своя модель</h3><p>Использует diamond-model-ai.fast для быстрых и точных ответов.</p></div>
         <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-folder-tree"></i></div><h3>Папки и синхронизация</h3><p>Группируйте чаты в папки с иконками. Синхронизация через DiamKey — доступ на всех устройствах.</p></div>
         <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-shield-alt"></i></div><h3>Приватность</h3><p>Никаких утечек. Ключи шифруются, чаты хранятся локально или в зашифрованном виде.</p></div>
         <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-chalkboard-user"></i></div><h3>Интеллектуальный диалог</h3><p>LaTeX, химические уравнения, блоки кода с подсветкой. Идеально для учёбы и работы.</p></div>
-        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-code"></i></div><h3>Програмированние</h3><p>Редактирование кода и запуск прямо в ИИ. Удобно для правок и написания проектов. </p></div>
-      <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-crown"></i></div><h3>Платная версия</h3><p>Покупается отдельно, но дает к более тонким настройкам ИИ. </p></div>
-        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-key"></i></div><h3>Diamkey</h3><p>Привязан к системе Diamkey, что делает ИИ удобным и прослеживаемым с вашего профиля Diamkey.</p></div>
-        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-ship"></i></div><h3>Плавность ответов</h3><p>Привязан к системе Diamkey, что делает ИИ удобным и прослеживаемым с вашего профиля Diamkey.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-code"></i></div><h3>Программирование</h3><p>Редактирование кода и запуск прямо в ИИ. Удобно для правок и написания проектов.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-crown"></i></div><h3>Платная версия</h3><p>Покупается отдельно, но даёт доступ к более тонким настройкам ИИ.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-key"></i></div><h3>DiamKey</h3><p>Привязан к системе DiamKey, что делает ИИ удобным и прослеживаемым с вашего профиля.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-ship"></i></div><h3>Плавность ответов</h3><p>Мгновенная генерация, отсутствие заметных задержек даже на слабых устройствах.</p></div>
       </div>
-      
     </div>
 
     <div class="section" id="demo">
@@ -735,7 +745,7 @@
           <button class="demo-question-btn" data-question="Какие возможности есть у Diamond AI?">Какие возможности?</button>
         </div>
         <div class="demo-chat" id="demoChat">
-          <div class="demo-message assistant"><div class="demo-bubble">Нажмите на любой вопрос сверху, чтобы увидить как я отвечаю</div></div>
+          <div class="demo-message assistant"><div class="demo-bubble">Нажмите на любой вопрос сверху, чтобы увидеть, как я отвечаю.</div></div>
         </div>
       </div>
     </div>
@@ -777,7 +787,15 @@
 
     <div class="footer glass" id="contacts">
       <div class="footer-links">
+        <a href="#" id="termsLink">Terms of Use</a>
+        <a href="#" id="privacyLink">Privacy Policy</a>
+        <a href="https://discord.gg/diamondshop" target="_blank">Discord</a>
+        <a href="https://t.me/vshpps" target="_blank">Telegram</a>
+      </div>
       <div class="copyright">© 2026 Diamond. Все права защищены.</div>
+    </div>
+  </div>
+
   <script type="importmap">
     { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }
   </script>
@@ -946,16 +964,21 @@
     document.getElementById('closeDiamKeyModal').addEventListener('click', () => diamKeyModal.classList.remove('active'));
     window.addEventListener('click', (e) => { if(e.target === diamKeyModal) diamKeyModal.classList.remove('active'); });
 
-    const installModal = document.getElementById('installModal');
-    document.getElementById('installHeroBtn').addEventListener('click', () => installModal.style.display = 'flex');
-    document.getElementById('closeInstallModal').addEventListener('click', () => installModal.style.display = 'none');
+    const soonModal = document.getElementById('soonModal');
+    const soonHeroBtn = document.getElementById('soonHeroBtn');
+    const closeSoonModal = document.getElementById('closeSoonModal');
+    const closeSoonModalBtn = document.getElementById('closeSoonModalBtn');
+    soonHeroBtn.addEventListener('click', () => soonModal.classList.add('active'));
+    if(closeSoonModal) closeSoonModal.addEventListener('click', () => soonModal.classList.remove('active'));
+    if(closeSoonModalBtn) closeSoonModalBtn.addEventListener('click', () => soonModal.classList.remove('active'));
+    window.addEventListener('click', (e) => { if(e.target === soonModal) soonModal.classList.remove('active'); });
 
     const termsModal = document.getElementById('termsModal'), privacyModal = document.getElementById('privacyModal');
     document.getElementById('termsLink').addEventListener('click', (e) => { e.preventDefault(); termsModal.style.display = 'flex'; });
     document.getElementById('privacyLink').addEventListener('click', (e) => { e.preventDefault(); privacyModal.style.display = 'flex'; });
     document.getElementById('closeTermsModal').addEventListener('click', () => termsModal.style.display = 'none');
     document.getElementById('closePrivacyModal').addEventListener('click', () => privacyModal.style.display = 'none');
-    window.addEventListener('click', (e) => { if(e.target === installModal) installModal.style.display = 'none'; if(e.target === termsModal) termsModal.style.display = 'none'; if(e.target === privacyModal) privacyModal.style.display = 'none'; });
+    window.addEventListener('click', (e) => { if(e.target === termsModal) termsModal.style.display = 'none'; if(e.target === privacyModal) privacyModal.style.display = 'none'; });
     
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e){
