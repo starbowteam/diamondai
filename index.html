@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0, user-scalable=yes">
-  <meta name="description" content="Diamond AI — интеллектуальный помощник нового поколения с E2E-шифрованием, генерацией изображений и полной приватностью.">
-  <meta name="keywords" content="ИИ, искусственный интеллект, Diamond AI, нейросеть, чат бот, генерация изображений, приватность">
+  <meta name="description" content="Diamond AI — интеллектуальный помощник с E2E-шифрованием, папками, синхронизацией через DiamKey и полной приватностью.">
+  <meta name="keywords" content="ИИ, искусственный интеллект, Diamond AI, нейросеть, чат бот, генерация изображений, приватность, синхронизация чатов">
   <meta property="og:title" content="Diamond AI | Интеллект, отточенный как алмаз">
-  <meta property="og:description" content="Собственная AI-модель diamond-techo.vshpps. Локальное хранение, никаких утечек.">
+  <meta property="og:description" content="Синхронизация через DiamKey, папки, поддержка LaTeX и кода. Работает локально — никаких утечек.">
   <meta property="og:type" content="website">
   <title>Diamond AI | Искусственный интеллект</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -27,7 +27,6 @@
       line-height: 1.5;
     }
 
-    /* 3D canvas background */
     #three-canvas {
       position: fixed;
       top: 0;
@@ -39,7 +38,6 @@
       opacity: 0.7;
     }
 
-    /* контент поверх canvas */
     .wrapper {
       position: relative;
       z-index: 10;
@@ -48,7 +46,6 @@
       padding: 20px 24px 40px;
     }
 
-    /* glass-морфинг стиль как в первом макете */
     .glass {
       background: rgba(18, 18, 22, 0.65);
       backdrop-filter: blur(16px);
@@ -104,7 +101,6 @@
       color: transparent;
     }
 
-    /* Burger menu для мобильных */
     .burger {
       display: none;
       cursor: pointer;
@@ -229,7 +225,6 @@
       margin-top: 8px;
     }
 
-    /* карточки фич */
     .features {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -284,7 +279,6 @@
       font-size: 0.95rem;
     }
 
-    /* статистика — ровные карточки */
     .stats {
       display: flex;
       justify-content: center;
@@ -510,7 +504,6 @@
       color: #ffffff;
     }
 
-    /* Модальные окна (DiamKey + другие) */
     .modal {
       display: flex;
       position: fixed;
@@ -600,7 +593,6 @@
       to { opacity: 1; }
     }
 
-    /* Медиазапросы: бургер-меню и адаптация */
     @media (max-width: 768px) {
       .wrapper { padding: 16px 16px 30px; }
       .navbar { padding: 14px 20px; flex-wrap: nowrap; justify-content: space-between; }
@@ -644,7 +636,7 @@
 <body>
   <canvas id="three-canvas"></canvas>
 
-  <!-- DIAMKEY МОДАЛ (обязательная) -->
+  <!-- DIAMKEY МОДАЛ -->
   <div class="modal" id="diamkeyModal">
     <div class="modal-content">
       <button class="modal-close" id="closeDiamKeyModal" style="position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; color:#ccc; cursor:pointer;"><i class="fas fa-times"></i></button>
@@ -656,38 +648,38 @@
           <i class="fas fa-gem"></i>
           <div class="eco-info" style="text-align: left;">
             <div class="eco-name">Diamond AI</div>
-            <div class="eco-desc">Искусственный интеллект нового поколения</div>
+            <div class="eco-desc">Интеллектуальный помощник, синхронизация чатов</div>
           </div>
         </div>
         <div class="eco-project-item">
           <i class="fas fa-comment-dots"></i>
           <div class="eco-info" style="text-align: left;">
             <div class="eco-name">Dirmess</div>
-            <div class="eco-desc">Защищённый мессенджер с E2E шифрованием</div>
+            <div class="eco-desc">Защищённый мессенджер с E2E-шифрованием</div>
           </div>
         </div>
         <div class="eco-project-item">
           <i class="fas fa-unlock-alt"></i>
           <div class="eco-info" style="text-align: left;">
             <div class="eco-name">Unlock</div>
-            <div class="eco-desc">Обход блокировок РКН</div>
+            <div class="eco-desc">Обход блокировок и свободный доступ</div>
           </div>
         </div>
       </div>
-      <p style="margin-bottom: 20px; color: #b0b0b0; font-size: 0.9rem;">Один аккаунт для всех проектов</p>
+      <p style="margin-bottom: 20px; color: #b0b0b0; font-size: 0.9rem;">Один аккаунт для всех проектов. Чаты и папки синхронизируются между устройствами.</p>
       <a href="https://diamkey.ru" target="_blank" class="btn btn-primary" style="background: linear-gradient(145deg,#4a4d58,#2a2c34);"><i class="fas fa-external-link-alt"></i> Перейти на DiamKey</a>
     </div>
   </div>
 
-  <!-- Остальные модалки -->
-  <div class="modal" id="installModal"><div class="modal-content"><i class="fas fa-download"></i><h3>Выберите платформу</h3><div class="platform-buttons" style="display:flex; gap:12px; justify-content:center; margin:20px 0;"><button class="platform-btn" data-os="windows">Windows (exe)</button><button class="platform-btn" data-os="macos">macOS (dmg)</button><button class="platform-btn" data-os="linux">Linux (AppImage)</button></div><p>Скоро будут доступны для скачивания. Следите за новостями!</p><button class="modal-close" id="closeInstallModal" style="background:rgba(255,255,255,0.1); padding:8px 20px; border-radius: 40px; margin-top:12px;">Закрыть</button></div></div>
-  <div class="modal" id="termsModal"><div class="modal-content" style="max-width:600px; text-align:left"><h3><i class="fas fa-file-contract"></i> Terms of Use</h3><div style="margin:20px 0; max-height:60vh; overflow-y:auto"><h4>1. Общие положения</h4><p>Настоящие Условия использования регулируют отношения между Diamond AI и пользователем.</p><h4>2. Описание сервиса</h4><p>Diamond AI — интеллектуальный помощник на модели diamond-techo.vshpps. Все данные хранятся локально.</p><h4>3. Контакты</h4><p>abugay12@mail.ru</p></div><button class="modal-close" id="closeTermsModal">Принять и закрыть</button></div></div>
-  <div class="modal" id="privacyModal"><div class="modal-content" style="max-width:600px; text-align:left"><h3><i class="fas fa-shield-alt"></i> Политика конфиденциальности</h3><div style="margin:20px 0; max-height:60vh; overflow-y:auto"><h4>1. Данные</h4><p>Хранятся локально: чаты, ключи, настройки. Не передаются третьим лицам.</p><h4>2. Контакты</h4><p>abugay12@mail.ru</p></div><button class="modal-close" id="closePrivacyModal">Принять и закрыть</button></div></div>
+  <!-- Модалка установки (отключена, только информационная) -->
+  <div class="modal" id="installModal"><div class="modal-content"><i class="fas fa-download"></i><h3>Скачать приложение</h3><p>Десктопные версии в разработке. Следите за новостями в Discord!</p><button class="modal-close" id="closeInstallModal" style="background:rgba(255,255,255,0.1); padding:8px 20px; border-radius: 40px; margin-top:12px;">Закрыть</button></div></div>
+  <div class="modal" id="termsModal"><div class="modal-content" style="max-width:600px; text-align:left"><h3><i class="fas fa-file-contract"></i> Terms of Use</h3><div style="margin:20px 0; max-height:60vh; overflow-y:auto"><h4>1. Общие положения</h4><p>Настоящие Условия использования регулируют отношения между Diamond AI и пользователем.</p><h4>2. Описание сервиса</h4><p>Diamond AI — интеллектуальный помощник, использующий передовые LLM. Все данные хранятся локально или синхронизируются через DiamKey.</p><h4>3. Контакты</h4><p>abugay12@mail.ru</p></div><button class="modal-close" id="closeTermsModal">Принять и закрыть</button></div></div>
+  <div class="modal" id="privacyModal"><div class="modal-content" style="max-width:600px; text-align:left"><h3><i class="fas fa-shield-alt"></i> Политика конфиденциальности</h3><div style="margin:20px 0; max-height:60vh; overflow-y:auto"><h4>1. Данные</h4><p>Чаты, папки и настройки хранятся локально и синхронизируются через DiamKey. Данные не передаются третьим лицам.</p><h4>2. Контакты</h4><p>abugay12@mail.ru</p></div><button class="modal-close" id="closePrivacyModal">Принять и закрыть</button></div></div>
 
   <div class="wrapper">
     <div class="navbar glass glow-silver">
       <a class="logo" href="#">
-        <img src="mp11.png" alt="Diamond AI" onerror="this.onerror=null; this.src='https://cdn.discordapp.com/attachments/1462418981825810535/1497846206385225798/111.png?ex=69ef017c&is=69edaffc&hm=bb995a330ba710ddc4db7e8874a2b2f2a455ca92ac01e147e73ca7ba14024945&'" style="height: 42px;">
+        <img src="logo.png" alt="Diamond AI" style="height: 42px;">
         <span>DIAMOND AI</span>
       </a>
       <div class="burger" id="burgerMenu">
@@ -697,59 +689,60 @@
         <a href="#demo">Демо</a>
         <a href="#creator">Создатель</a>
         <a href="#faq">FAQ</a>
-        <span class="diamkey-btn" id="openDiamKeyBtn"><i class= style="margin-right: 6px;"></i>DiamKey</span>
+        <span class="diamkey-btn" id="openDiamKeyBtn"><i class="fas fa-key" style="margin-right: 6px;"></i>DiamKey</span>
         <a href="https://discord.gg/diamondshop" target="_blank" class="discord-icon"><i class="fab fa-discord"></i></a>
       </div>
     </div>
 
     <div class="hero glass glow-silver">
       <h1>Интеллект,<br>отточенный как алмаз</h1>
-      <p>DIAMOND AI — нейросетевой помощник на собственной модели diamond-techo.vshpps. Работает локально, защищает приватность и понимает вас с полуслова.</p>
+      <p>DIAMOND AI — интеллектуальный помощник нового поколения. Работает с передовыми LLM, поддерживает папки, формулы, код и синхронизацию через DiamKey. Все данные под вашим контролем.</p>
       <div class="hero-buttons">
-        <button class="btn btn-primary" id="installHeroBtn"><i class="fas fa-download"></i> Скачать приложение</button>
+        <button class="btn btn-primary" id="installHeroBtn"><i class="fas fa-download"></i> Скоро</button>
         <a href="#features" class="btn" style="background: transparent;">Узнать больше →</a>
         <a href="https://web-diamond.vercel.app/" class="btn" target="_blank" style="background: transparent;">Веб версия</a>
       </div>
     </div>
 
     <div class="stats" id="stats">
-      <div class="stat-item"><div class="stat-number" data-target="94">0</div><div class="stat-label">активных пользователей</div></div>
-      <div class="stat-item"><div class="stat-number" data-target="1580">0</div><div class="stat-label">сообщений сгенерировано</div></div>
+      <div class="stat-item"><div class="stat-number" data-target="112">0</div><div class="stat-label">активных пользователей</div></div>
+      <div class="stat-item"><div class="stat-number" data-target="4250">0</div><div class="stat-label">сообщений сгенерировано</div></div>
       <div class="stat-item"><div class="stat-number" data-target="100">0</div><div class="stat-label">% приватности</div></div>
     </div>
 
     <div class="section" id="features">
       <div class="section-title">Почему <span>DIAMOND AI</span>?</div>
       <div class="features">
-        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-brain"></i></div><h3>Собственная модель</h3><p>Уникальная архитектура diamond-techo.vshpps — быстрая, лёгкая, без утечек данных.</p></div>
-        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-folder-tree"></i></div><h3>Папки и сортировка</h3><p>Группируйте чаты в папки с иконками. Не теряйте важные диалоги.</p></div>
-        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-shield-alt"></i></div><h3>Приватность</h3><p>Все данные хранятся локально. API-ключи шифруются.</p></div>
-        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-chalkboard-user"></i></div><h3>Интеллектуальный диалог</h3><p>LaTeX, код, химические уравнения. Идеально для учёбы.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-brain"></i></div><h3>Своя модель</h3><p>Использует diamond-model-ai.fast для быстрых и точных ответов. </p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-folder-tree"></i></div><h3>Папки и синхронизация</h3><p>Группируйте чаты в папки с иконками. Синхронизация через DiamKey — доступ на всех устройствах.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-shield-alt"></i></div><h3>Приватность</h3><p>Никаких утечек. Ключи шифруются, чаты хранятся локально или в зашифрованном виде.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-chalkboard-user"></i></div><h3>Интеллектуальный диалог</h3><p>LaTeX, химические уравнения, блоки кода с подсветкой. Идеально для учёбы и работы.</p></div>
+        <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-code"></i></div><h3>Програмированние</h3><p>Редактирование кода и запуск прямо в ИИ. Удобно для правок и написания проектов. </p></div>
+      <div class="feature-card"><div class="feature-icon-wrap"><i class="fas fa-crown"></i></div><h3>Платная версия</h3><p>Покупается отдельно, но дает к более тонким настройкам ИИ. </p></div>
       </div>
     </div>
 
     <div class="section" id="demo">
       <div class="section-title">Интерфейс <span>будущего</span></div>
       <div class="interactive-demo">
-        <h3>✨ Попробуйте сами</h3>
+        <h3>Попробуйте сами</h3>
         <div class="demo-questions">
           <button class="demo-question-btn" data-question="Что такое Diamond AI?">Что такое Diamond AI?</button>
           <button class="demo-question-btn" data-question="Как начать работу?">Как начать работу?</button>
           <button class="demo-question-btn" data-question="Какие возможности есть у Diamond AI?">Какие возможности?</button>
         </div>
         <div class="demo-chat" id="demoChat">
-          <div class="demo-message assistant"><div class="demo-bubble">Нажмите на любой вопрос, чтобы увидеть, как я отвечаю. 🚀</div></div>
+          <div class="demo-message assistant"><div class="demo-bubble">Нажмите на любой вопрос сверху, чтобы увидить как я отвечаю</div></div>
         </div>
-        <!-- Кнопка очистки чата удалена -->
       </div>
     </div>
 
     <div class="section">
       <div class="section-title">Начать <span>просто</span></div>
       <div class="steps">
-        <div class="step"><div class="step-number">1</div><p>Скачайте приложение для вашей платформы</p></div>
-        <div class="step"><div class="step-number">2</div><p>Введите API-ключ OpenRouter или используйте встроенный</p></div>
-        <div class="step"><div class="step-number">3</div><p>Начинайте диалог с ИИ и организуйте чаты в папки</p></div>
+        <div class="step"><div class="step-number">1</div><p>Перейдите на <strong>веб-версию</strong> или скачайте приложение (скоро)</p></div>
+        <div class="step"><div class="step-number">2</div><p>Войдите через <strong>DiamKey</strong> — ваши чаты и папки синхронизируются</p></div>
+        <div class="step"><div class="step-number">3</div><p>Задавайте вопросы, создавайте папки, пользуйтесь ИИ</p></div>
       </div>
     </div>
 
@@ -757,11 +750,11 @@
       <div class="section-title"><span>Создатель</span> проекта</div>
       <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 48px; text-align: center; background: rgba(20,22,28,0.5); backdrop-filter: blur(12px); border-radius: 48px; padding: 40px 20px; border:1px solid rgba(180,190,220,0.2);">
         <div style="width: 140px; height: 140px; border-radius: 50%; overflow: hidden; background: #1a1a22; border: 2px solid #5a5e72;">
-          <img src="am12.png" alt="viktorshopa" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%239ca3af%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E'">
+          <img src="viktorshopa.jpg" alt="viktorshopa" style="width:100%; height:100%; object-fit:cover;" onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22%239ca3af%22%3E%3Cpath d=%22M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z%22/%3E%3C/svg%3E'">
         </div>
         <div style="max-width:500px;">
           <h3 style="font-size: 1.8rem;">viktorshopa</h3>
-          <p style="color: #ccc;">Создатель всея экосистемы Diamond. Разработчик Diamond Defender, Diamond AI и вдохновитель сообщества.</p>
+          <p style="color: #ccc;">Создатель экосистемы Diamond. Разработчик Diamond AI, DiamKey, Unlock и Dirmess. Вдохновитель сообщества свободного интернета.</p>
           <div style="display:flex; gap:20px; justify-content:center; margin-top:20px;">
             <a href="https://discord.gg/diamondshop" target="_blank" style="color:#c0c0c0; font-size: 1.5rem;"><i class="fab fa-discord"></i></a>
             <a href="https://t.me/vshpps" target="_blank" style="color:#c0c0c0; font-size: 1.5rem;"><i class="fab fa-telegram"></i></a>
@@ -773,23 +766,15 @@
     <div class="section" id="faq">
       <div class="section-title">Часто задаваемые <span>вопросы</span></div>
       <div class="faq-list">
-        <div class="faq-item"><div class="faq-question"><span>Как установить DIAMOND AI?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Нажмите «Скачать» на сайте, выберите вашу ОС. После установки запустите приложение.</div></div>
-        <div class="faq-item"><div class="faq-question"><span>Нужен ли API-ключ?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Для чата требуется ключ OpenRouter. Можно использовать встроенный (с ограничениями).</div></div>
-        <div class="faq-item"><div class="faq-question"><span>Можно ли использовать без интернета?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Для работы AI нужен интернет, но все чаты сохраняются локально.</div></div>
+        <div class="faq-item"><div class="faq-question"><span>Как установить Diamond AI?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Скачайте приложение с сайта или пользуйтесь веб-версией. Установка не требуется для веб-версии.</div></div>
+        <div class="faq-item"><div class="faq-question"><span>Как синхронизировать чаты между устройствами?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Зайдите в веб-версию через один аккаунт DiamKey — чаты и папки автоматически синхронизируются.</div></div>
+        <div class="faq-item"><div class="faq-question"><span>Что такое Unlock и Dirmess?</span><i class="fas fa-chevron-down faq-icon"></i></div><div class="faq-answer">Unlock — обход блокировок, Dirmess — защищённый мессенджер. Это проекты экосистемы Diamond.</div></div>
       </div>
     </div>
 
     <div class="footer glass" id="contacts">
       <div class="footer-links">
-        <a href="https://discord.gg/diamondshop" target="_blank">Discord-сервер</a>
-        <a href="https://t.me/vshpps" target="_blank">Telegram</a>
-        <a href="#" id="termsLink">Terms of Use</a>
-        <a href="#" id="privacyLink">Privacy Policy</a>
-      </div>
       <div class="copyright">© 2026 Diamond. Все права защищены.</div>
-    </div>
-  </div>
-
   <script type="importmap">
     { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }
   </script>
@@ -884,22 +869,22 @@
   <script>
     // бургер меню
     const burger = document.getElementById('burgerMenu');
-    const navLinks = document.getElementById('navLinks');
+    const navLinksEl = document.getElementById('navLinks');
     burger.addEventListener('click', () => {
-      navLinks.classList.toggle('active');
+      navLinksEl.classList.toggle('active');
     });
     document.addEventListener('click', (e) => {
-      if (!navLinks.contains(e.target) && !burger.contains(e.target) && navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
+      if (!navLinksEl.contains(e.target) && !burger.contains(e.target) && navLinksEl.classList.contains('active')) {
+        navLinksEl.classList.remove('active');
       }
     });
 
     // интерактивность demo
     const demoChat = document.getElementById('demoChat');
     const answers = {
-      "Что такое Diamond AI?": "Diamond AI — интеллектуальный помощник на собственной модели diamond-techo.vshpps. Я помогаю с любыми вопросами: от учёбы до творчества, поддерживаю LaTeX, код и даже умею искать информацию в интернете.",
-      "Как начать работу?": "Скачайте приложение (кнопка «Скачать»), установите, введите API-ключ OpenRouter или используйте встроенный. После этого можно задавать вопросы и создавать папки для чатов.",
-      "Какие возможности есть у Diamond AI?": "Папки для сортировки, генерация изображений (ГенХаб), поддержка формул и кода, полная приватность, умный поиск в интернете и современный тёмный интерфейс."
+      "Что такое Diamond AI?": "Diamond AI — интеллектуальный помощник на основе передовых LLM. Я помогаю с любыми вопросами: от учёбы до творчества, поддерживаю LaTeX, код и умею искать информацию в интернете.",
+      "Как начать работу?": "Воспользуйтесь веб-версией (кнопка «Веб версия»). Войдите через DiamKey, чтобы синхронизировать чаты между устройствами.",
+      "Какие возможности есть у Diamond AI?": "Папки для сортировки, синхронизация через DiamKey, поддержка формул и кода, полная приватность, умный поиск и современный тёмный интерфейс. ГенХаб (генерация изображений) в разработке."
     };
     function addDemoMsg(role, text) {
       let msgDiv = document.createElement('div');
@@ -961,7 +946,6 @@
     const installModal = document.getElementById('installModal');
     document.getElementById('installHeroBtn').addEventListener('click', () => installModal.style.display = 'flex');
     document.getElementById('closeInstallModal').addEventListener('click', () => installModal.style.display = 'none');
-    document.querySelectorAll('.platform-btn').forEach(btn => btn.addEventListener('click', (e) => { e.preventDefault(); alert(`Скачивание для ${btn.dataset.os} скоро будет доступно!`); installModal.style.display = 'none'; }));
 
     const termsModal = document.getElementById('termsModal'), privacyModal = document.getElementById('privacyModal');
     document.getElementById('termsLink').addEventListener('click', (e) => { e.preventDefault(); termsModal.style.display = 'flex'; });
@@ -978,7 +962,7 @@
         let targetId = href.substring(1);
         let target = document.getElementById(targetId);
         if(target) target.scrollIntoView({ behavior: 'smooth' });
-        if (navLinks.classList.contains('active')) navLinks.classList.remove('active');
+        if (navLinksEl.classList.contains('active')) navLinksEl.classList.remove('active');
       });
     });
   </script>
