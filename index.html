@@ -584,6 +584,75 @@
       color: transparent;
     }
 
+    /* Стили для модалки загрузки */
+    .download-modal {
+      max-width: 700px;
+      width: 95%;
+      padding: 40px 30px;
+    }
+    .platform-tabs {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+    .platform-tab {
+      padding: 8px 18px;
+      border-radius: 30px;
+      border: 1px solid rgba(180, 190, 220, 0.3);
+      background: transparent;
+      color: #ccc;
+      cursor: pointer;
+      transition: all 0.25s;
+      font-weight: 500;
+    }
+    .platform-tab.active {
+      background: rgba(108, 92, 231, 0.2);
+      border-color: #6c5ce7;
+      color: #fff;
+    }
+    .platform-content {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    .platform-content.active {
+      display: flex;
+    }
+    .iphone-download-row {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .iphone-preview {
+      width: 160px;
+      height: auto;
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+    .download-instructions {
+      text-align: left;
+      font-size: 0.9rem;
+      color: #b0b0b0;
+      line-height: 1.6;
+    }
+    .download-instructions ol {
+      padding-left: 20px;
+    }
+    .download-btn-large {
+      padding: 14px 32px;
+      font-size: 1.1rem;
+    }
+    .platform-placeholder {
+      color: #b0b0b0;
+      padding: 30px 0;
+      font-size: 1.2rem;
+    }
+
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
@@ -625,6 +694,7 @@
       .stats { gap: 20px; }
       .stat-item { padding: 12px 20px; min-width: 140px; }
       .stat-number { font-size: 2rem; }
+      .iphone-download-row { flex-direction: column; }
     }
 
     @media (max-width: 480px) {
@@ -671,7 +741,62 @@
     </div>
   </div>
 
-  <!-- Модалка "Скоро будет" (вместо модалки установки) -->
+  <!-- Модалка "Скачать приложение" -->
+  <div class="modal" id="downloadModal">
+    <div class="modal-content download-modal">
+      <button class="modal-close" id="closeDownloadModal" style="position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; color:#ccc; cursor:pointer;"><i class="fas fa-times"></i></button>
+      <i class="fas fa-download" style="font-size: 2.5rem; color: #c0c0c0; margin-bottom: 10px;"></i>
+      <h2>Скачать Diamond AI</h2>
+      <p style="margin-bottom: 24px; color: #b0b0b0;">Выберите вашу платформу</p>
+      
+      <div class="platform-tabs" id="platformTabs">
+        <button class="platform-tab active" data-platform="ios"><i class="fab fa-apple"></i> iPhone</button>
+        <button class="platform-tab" data-platform="android"><i class="fab fa-android"></i> Android</button>
+        <button class="platform-tab" data-platform="windows"><i class="fab fa-windows"></i> Windows</button>
+        <button class="platform-tab" data-platform="mac"><i class="fab fa-apple"></i> Mac</button>
+        <button class="platform-tab" data-platform="linux"><i class="fab fa-linux"></i> Linux</button>
+      </div>
+
+      <!-- iOS -->
+      <div class="platform-content active" id="platform-ios">
+        <div class="iphone-download-row">
+          <img src="iphone.png" alt="iPhone" class="iphone-preview">
+          <div style="display: flex; flex-direction: column; gap: 16px; align-items: flex-start;">
+            <a href="diamond-ai.mobileconfig" class="btn btn-primary download-btn-large" download>
+              <i class="fas fa-cog"></i> Установить профиль
+            </a>
+            <div class="download-instructions">
+              <strong style="color:#e5e7eb;">Инструкция по установке:</strong>
+              <ol>
+                <li>Нажмите «Установить профиль» – скачается файл конфигурации.</li>
+                <li>Перейдите в <strong>Настройки</strong> → вверху появится <strong>«Профиль загружен»</strong>.</li>
+                <li>Нажмите «Установить», введите код-пароль устройства (если требуется).</li>
+                <li>Подтвердите установку. Ярлык Diamond AI появится на рабочем столе.</li>
+                <li>Готово! Открывайте приложение как обычную программу.</li>
+              </ol>
+              <p style="margin-top: 8px;">После установки профиль можно удалить в Настройках → Основные → VPN и управление устройством.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Остальные платформы (заглушки) -->
+      <div class="platform-content" id="platform-android">
+        <div class="platform-placeholder"><i class="fab fa-android" style="font-size: 3rem;"></i><br>В разработке<br><small>Скоро появится</small></div>
+      </div>
+      <div class="platform-content" id="platform-windows">
+        <div class="platform-placeholder"><i class="fab fa-windows" style="font-size: 3rem;"></i><br>В разработке<br><small>Скоро появится</small></div>
+      </div>
+      <div class="platform-content" id="platform-mac">
+        <div class="platform-placeholder"><i class="fab fa-apple" style="font-size: 3rem;"></i><br>В разработке<br><small>Скоро появится</small></div>
+      </div>
+      <div class="platform-content" id="platform-linux">
+        <div class="platform-placeholder"><i class="fab fa-linux" style="font-size: 3rem;"></i><br>В разработке<br><small>Скоро появится</small></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Модалка "Скоро будет" (старая) -->
   <div class="modal" id="soonModal">
     <div class="modal-content">
       <button class="modal-close" id="closeSoonModal" style="position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 1.5rem; color:#ccc; cursor:pointer;"><i class="fas fa-times"></i></button>
@@ -709,12 +834,14 @@
       <h1>Интеллект,<br>отточенный как алмаз</h1>
       <p>DIAMOND AI — ИИ, работающий на собственной модели, созданный для помощи каждому человеку на любой стороне света, бесплатный — для каждого!</p>
       <div class="hero-buttons">
-        <button class="btn btn-primary" id="soonHeroBtn"><i class="fas fa-star"></i> Волшебство грядёт</button>
+        <!-- Заменена кнопка "Волшебство грядёт" на "Скачать приложение" -->
+        <button class="btn btn-primary" id="openDownloadBtn"><i class="fas fa-download"></i> Скачать приложение</button>
         <a href="#features" class="btn" style="background: transparent;">Узнать больше →</a>
         <a href="https://diam-ai.ru" class="btn" target="_blank" style="background: transparent;">Веб версия</a>
       </div>
     </div>
 
+    <!-- Остальной контент страницы без изменений -->
     <div class="stats" id="stats">
       <div class="stat-item"><div class="stat-number" data-target="68">0</div><div class="stat-label">активных пользователей</div></div>
       <div class="stat-item"><div class="stat-number" data-target="2871">0</div><div class="stat-label">сообщений сгенерировано</div></div>
@@ -796,6 +923,7 @@
     </div>
   </div>
 
+  <!-- Скрипты -->
   <script type="importmap">
     { "imports": { "three": "https://unpkg.com/three@0.128.0/build/three.module.js" } }
   </script>
@@ -965,10 +1093,8 @@
     window.addEventListener('click', (e) => { if(e.target === diamKeyModal) diamKeyModal.classList.remove('active'); });
 
     const soonModal = document.getElementById('soonModal');
-    const soonHeroBtn = document.getElementById('soonHeroBtn');
     const closeSoonModal = document.getElementById('closeSoonModal');
     const closeSoonModalBtn = document.getElementById('closeSoonModalBtn');
-    soonHeroBtn.addEventListener('click', () => soonModal.classList.add('active'));
     if(closeSoonModal) closeSoonModal.addEventListener('click', () => soonModal.classList.remove('active'));
     if(closeSoonModalBtn) closeSoonModalBtn.addEventListener('click', () => soonModal.classList.remove('active'));
     window.addEventListener('click', (e) => { if(e.target === soonModal) soonModal.classList.remove('active'); });
@@ -980,6 +1106,25 @@
     document.getElementById('closePrivacyModal').addEventListener('click', () => privacyModal.style.display = 'none');
     window.addEventListener('click', (e) => { if(e.target === termsModal) termsModal.style.display = 'none'; if(e.target === privacyModal) privacyModal.style.display = 'none'; });
     
+    // Открытие/закрытие модалки загрузки
+    const downloadModal = document.getElementById('downloadModal');
+    document.getElementById('openDownloadBtn').addEventListener('click', () => downloadModal.classList.add('active'));
+    document.getElementById('closeDownloadModal').addEventListener('click', () => downloadModal.classList.remove('active'));
+    window.addEventListener('click', (e) => { if(e.target === downloadModal) downloadModal.classList.remove('active'); });
+
+    // Переключение платформ в модалке загрузки
+    const tabs = document.querySelectorAll('.platform-tab');
+    const contents = document.querySelectorAll('.platform-content');
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+        tab.classList.add('active');
+        const platform = tab.dataset.platform;
+        document.getElementById('platform-' + platform).classList.add('active');
+      });
+    });
+
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e){
         let href = this.getAttribute('href');
