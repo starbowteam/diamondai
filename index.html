@@ -534,6 +534,12 @@
     .download-btn-large {
       padding: 14px 32px;
       font-size: 1.1rem;
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: auto;
+      align-self: flex-start;
     }
     .platform-placeholder {
       color: #b0b0b0;
@@ -593,7 +599,25 @@
       .stats { gap: 20px; }
       .stat-item { padding: 12px 20px; min-width: 140px; }
       .stat-number { font-size: 2rem; }
-      .platform-content.active { flex-direction: column; align-items: center; }
+      .platform-content.active {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .download-instructions {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .download-instructions ol {
+        text-align: left;
+        display: inline-block;
+      }
+      .download-btn-large {
+        align-self: center;
+        margin-top: 24px;
+      }
     }
     @media (max-width: 480px) {
       .btn { padding: 10px 22px; font-size: 0.9rem; }
@@ -886,7 +910,6 @@
   </script>
 
   <script>
-    // Бургер меню
     const burger = document.getElementById('burgerMenu');
     const navLinksEl = document.getElementById('navLinks');
     burger.addEventListener('click', () => navLinksEl.classList.toggle('active'));
@@ -896,7 +919,6 @@
       }
     });
 
-    // Интерактивность demo
     const demoChat = document.getElementById('demoChat');
     const answers = {
       "Что такое Diamond AI?": "Diamond AI — интеллектуальный помощник на основе передовых LLM. Я помогаю с любыми вопросами: от учёбы до творчества, поддерживаю LaTeX, код и умею искать информацию в интернете.",
@@ -935,7 +957,6 @@
       });
     });
 
-    // Счётчики
     const counters = document.querySelectorAll('.stat-number');
     const animateCounter = (el) => {
       let target = parseInt(el.dataset.target), current = 0, increment = target / 70;
@@ -951,12 +972,10 @@
     }, { threshold: 0.4 });
     counters.forEach(c => observerCounter.observe(c));
 
-    // FAQ
     document.querySelectorAll('.faq-item').forEach(item => {
       item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
     });
 
-    // Модалки
     const diamKeyModal = document.getElementById('diamkeyModal');
     document.getElementById('openDiamKeyBtn').addEventListener('click', () => diamKeyModal.classList.add('active'));
     document.getElementById('closeDiamKeyModal').addEventListener('click', () => diamKeyModal.classList.remove('active'));
@@ -967,7 +986,6 @@
     document.getElementById('closeDownloadModal').addEventListener('click', () => downloadModal.classList.remove('active'));
     window.addEventListener('click', (e) => { if(e.target === downloadModal) downloadModal.classList.remove('active'); });
 
-    // Переключение платформ в модалке загрузки
     const tabs = document.querySelectorAll('.platform-tab');
     const contents = document.querySelectorAll('.platform-content');
     tabs.forEach(tab => {
@@ -992,7 +1010,6 @@
     document.getElementById('closePrivacyModal').addEventListener('click', () => privacyModal.style.display = 'none');
     window.addEventListener('click', (e) => { if(e.target === termsModal) termsModal.style.display = 'none'; if(e.target === privacyModal) privacyModal.style.display = 'none'; });
 
-    // Плавный скролл
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e){
         let href = this.getAttribute('href');
