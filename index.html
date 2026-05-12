@@ -481,38 +481,37 @@
     }
     .platform-content.active {
       display: flex;
-      flex-direction: row;
-      gap: 30px;
-      align-items: flex-start;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
+      gap: 24px;
     }
     .preview-img {
-      width: 200px;
+      width: 260px;
       height: auto;
-      border-radius: 24px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+      border-radius: 32px;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.6);
       object-fit: cover;
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.15);
+      display: block;
+      margin: 0 auto;
     }
     .download-instructions {
-      text-align: left;
+      text-align: center;
       color: #b0b0b0;
-      max-width: 400px;
+      max-width: 380px;
     }
-    .download-instructions ol {
-      padding-left: 20px;
-      margin-top: 10px;
+    .download-instructions p {
+      margin: 12px 0;
+      font-size: 1rem;
     }
     .download-btn-large {
       padding: 14px 32px;
       font-size: 1.1rem;
-      margin-top: 20px;
+      margin-top: 8px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: auto;
-      align-self: flex-start;
     }
     .platform-placeholder {
       color: #b0b0b0;
@@ -570,10 +569,8 @@
       .stats { gap: 20px; }
       .stat-item { padding: 12px 20px; min-width: 140px; }
       .stat-number { font-size: 2rem; }
-      .platform-content.active { flex-direction: column; align-items: center; text-align: center; }
-      .download-instructions { text-align: center; display: flex; flex-direction: column; align-items: center; }
-      .download-instructions ol { text-align: left; display: inline-block; }
-      .download-btn-large { align-self: center; margin-top: 24px; }
+      .preview-img { width: 200px; }
+      .download-instructions p { font-size: 0.9rem; }
     }
     @media (max-width: 480px) {
       .btn { padding: 10px 22px; font-size: 0.9rem; }
@@ -643,20 +640,13 @@
         <div class="platform-placeholder"><i class="fab fa-android" style="font-size:3rem;"></i><br>В разработке<br><small>Скоро появится</small></div>
       </div>
 
-      <!-- WINDOWS: Заполнено -->
+      <!-- WINDOWS: по центру, крупная картинка, краткое описание -->
       <div class="platform-content" id="platform-windows">
-        <img src="windows.png" alt="Windows" class="preview-img" style="width:180px;">
+        <img src="windows.png" alt="Windows" class="preview-img" style="width: 280px;">
         <div class="download-instructions">
-          <strong style="color:#e5e7eb;">Установка на Windows</strong>
-          <ol>
-            <li>Скачайте установочный файл Diamond AI Setup.exe.</li>
-            <li>Запустите установщик и следуйте инструкциям мастера установки.</li>
-            <li>Выберите папку для установки или оставьте предложенную по умолчанию.</li>
-            <li>После завершения установки запустите Diamond AI из меню «Пуск» или с рабочего стола.</li>
-            <li>Войдите через DiamKey, чтобы синхронизировать чаты и папки.</li>
-          </ol>
+          <p>📥 Скачай установщик → запусти → готово</p>
           <a href="https://transfiles.ru/gj2u3" class="btn btn-primary download-btn-large" target="_blank">
-            <i class="fas fa-download"></i> Скачать для Windows
+            <i class="fab fa-windows"></i> Скачать для Windows
           </a>
         </div>
       </div>
@@ -876,7 +866,6 @@
         i++;
         setTimeout(typeWriter, 70);
       } else {
-        // добавим курсор
         const cursor = document.createElement('span');
         cursor.className = 'typing-cursor';
         typedEl.appendChild(cursor);
@@ -896,7 +885,7 @@
       }
     });
 
-    // --- Модалки (DiamKey, Download, Soon, Terms, Privacy) ---
+    // --- Модалки ---
     const diamKeyModal = document.getElementById('diamkeyModal');
     document.getElementById('openDiamKeyBtn').addEventListener('click', () => diamKeyModal.classList.add('active'));
     document.getElementById('closeDiamKeyModal').addEventListener('click', () => diamKeyModal.classList.remove('active'));
@@ -931,19 +920,14 @@
     document.getElementById('closePrivacyModal').addEventListener('click', () => privacyModal.style.display = 'none');
     window.addEventListener('click', (e) => { if(e.target === termsModal) termsModal.style.display = 'none'; if(e.target === privacyModal) privacyModal.style.display = 'none'; });
 
-    // --- Анимации при скролле (Intersection Observer) ---
+    // --- Анимации ---
     const observerOptions = { threshold: 0.2, rootMargin: '0px 0px -50px 0px' };
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
     }, observerOptions);
-
     document.querySelectorAll('.feature-card, .stat-item, .step, .faq-item, .section-title').forEach(el => observer.observe(el));
 
-    // --- Счётчики статистики (анимация чисел) ---
+    // --- Счётчики ---
     const counters = document.querySelectorAll('.stat-number');
     const animateCounter = (el) => {
       let target = parseInt(el.dataset.target), current = 0, increment = target / 70;
@@ -959,7 +943,7 @@
     }, { threshold: 0.4 });
     counters.forEach(c => counterObserver.observe(c));
 
-    // --- FAQ аккордеон ---
+    // --- FAQ ---
     document.querySelectorAll('.faq-item').forEach(item => {
       item.querySelector('.faq-question').addEventListener('click', () => item.classList.toggle('active'));
     });
