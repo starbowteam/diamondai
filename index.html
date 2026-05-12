@@ -487,12 +487,13 @@
       justify-content: center;
       flex-wrap: wrap;
     }
-    .iphone-preview {
-      width: 180px;
+    .preview-img {
+      width: 200px;
       height: auto;
       border-radius: 24px;
       box-shadow: 0 8px 20px rgba(0,0,0,0.5);
-      object-fit: contain;
+      object-fit: cover;
+      border: 1px solid rgba(255,255,255,0.1);
     }
     .download-instructions {
       text-align: left;
@@ -622,7 +623,7 @@
       </div>
 
       <div class="platform-content active" id="platform-ios">
-        <img src="iphone.png" alt="iPhone" class="iphone-preview">
+        <img src="iphone.png" alt="iPhone" class="preview-img">
         <div class="download-instructions">
           <strong style="color:#e5e7eb;">Установка на iPhone</strong>
           <ol>
@@ -641,9 +642,25 @@
       <div class="platform-content" id="platform-android">
         <div class="platform-placeholder"><i class="fab fa-android" style="font-size:3rem;"></i><br>В разработке<br><small>Скоро появится</small></div>
       </div>
+
+      <!-- WINDOWS: Заполнено -->
       <div class="platform-content" id="platform-windows">
-        <div class="platform-placeholder"><i class="fab fa-windows" style="font-size:3rem;"></i><br>В разработке<br><small>Скоро появится</small></div>
+        <img src="windows.png" alt="Windows" class="preview-img" style="width:180px;">
+        <div class="download-instructions">
+          <strong style="color:#e5e7eb;">Установка на Windows</strong>
+          <ol>
+            <li>Скачайте установочный файл Diamond AI Setup.exe.</li>
+            <li>Запустите установщик и следуйте инструкциям мастера установки.</li>
+            <li>Выберите папку для установки или оставьте предложенную по умолчанию.</li>
+            <li>После завершения установки запустите Diamond AI из меню «Пуск» или с рабочего стола.</li>
+            <li>Войдите через DiamKey, чтобы синхронизировать чаты и папки.</li>
+          </ol>
+          <a href="https://transfiles.ru/gj2u3" class="btn btn-primary download-btn-large" target="_blank">
+            <i class="fas fa-download"></i> Скачать для Windows
+          </a>
+        </div>
       </div>
+
       <div class="platform-content" id="platform-mac">
         <div class="platform-placeholder"><i class="fab fa-apple" style="font-size:3rem;"></i><br>В разработке<br><small>Скоро появится</small></div>
       </div>
